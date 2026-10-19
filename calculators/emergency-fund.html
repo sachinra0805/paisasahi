@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emergency Fund Sizer — How Many Months Do You Need? | PaisaSahi</title>
+<meta name="description" content="How big should your emergency fund be? This sizer recommends 3–12 months of expenses based on your EMIs, dependents, and job stability — then shows how fast you can build it. Free, no sign-up.">
+<link rel="stylesheet" href="../assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Where should I keep my emergency fund in India?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Somewhere safe and reachable within a day or two: a separate savings account, ideally with a sweep-in or flexi deposit, or a liquid mutual fund. Not in equity, not locked in long fixed deposits with penalties, and not in the account you spend from daily."}
+    },
+    {
+      "@type": "Question",
+      "name": "When is it okay to use the emergency fund?",
+      "acceptedAnswer": {"@type": "Answer", "text": "For income or health shocks: job loss, medical emergencies, urgent home repairs. Not for vacations, gadgets, or weddings. And rebuild it immediately afterwards, before resuming other investing."}
+    },
+    {
+      "@type": "Question",
+      "name": "Should I clear debt first or build the emergency fund first?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Do both in order. Keep a small starter buffer of about one month of essentials first, then attack high-interest debt aggressively, then build the full fund. An emergency with zero buffer usually becomes more debt."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is keeping cash idle in an emergency fund a waste?",
+      "acceptedAnswer": {"@type": "Answer", "text": "It is insurance, not investment. The return is not being forced to borrow at 36 percent or redeem long-term investments at the worst possible moment. Judge it against the cost of the alternative, not against equity returns."}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="ribbon">No spam calls · No bought rankings · <b>Free forever</b></div>
+
+<header class="site">
+  <div class="nav">
+    <a class="logo" href="../index.html">Paisa<span>Sahi</span></a>
+    <div class="nav-links">
+      <a href="../calculators/emi.html">Calculators</a>
+      <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+      <a href="../guides/new-vs-old-regime-fy2026-27.html">Guides</a>
+      <a href="../our-promise.html">Our Promise</a>
+      <a class="btn" href="#newsletter">Get the letter</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="wrap-narrow">
+
+  <div class="page-head">
+    <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="../calculators/emi.html">Calculators</a> › Emergency fund</div>
+    <div class="kicker">Calculator</div>
+    <h1>How big should your emergency fund be?</h1>
+    <p class="lede">"3–6 months of expenses" is the standard advice — and it's wrong for half the people who hear it. A freelancer with two kids and a home loan needs more than a government employee with no EMIs. This sizer adjusts for your life.</p>
+    <div class="answer-box">
+      <strong>The one-line answer:</strong> most households need <strong>3–12 months of essential spending</strong> set aside. Your number rises with EMIs, dependents, and income instability — this tool computes yours and shows how fast you can build it.
+    </div>
+    <p class="updated">Updated: October 2026</p>
+  </div>
+
+  <div class="calc">
+    <h2>The fund sizer</h2>
+    <p class="hint">Essential expenses = non-negotiables: rent, food, school fees, insurance, utilities. Not shopping, not SIPs.</p>
+
+    <div class="field"><label>Monthly essential expenses <output id="o-exp">₹60,000</output></label>
+      <input type="range" id="in-exp" min="10000" max="300000" step="5000" value="60000"></div>
+
+    <div class="field"><label>Monthly EMIs (all loans) <output id="o-emi">₹25,000</output></label>
+      <input type="range" id="in-emi" min="0" max="150000" step="1000" value="25000"></div>
+
+    <div class="field"><label for="in-dep">Financial dependents</label>
+      <select id="in-dep">
+        <option value="0" selected>0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3 or more</option>
+      </select></div>
+
+    <div class="field"><label for="in-job">Job type</label>
+      <select id="in-job">
+        <option value="govt">Salaried — government / PSU</option>
+        <option value="private" selected>Salaried — private sector</option>
+        <option value="self">Self-employed (business/profession)</option>
+        <option value="free">Freelancer / gig / variable income</option>
+      </select></div>
+
+    <div class="field"><label>How much can you set aside per month? <output id="o-save">₹15,000</output></label>
+      <input type="range" id="in-save" min="2000" max="100000" step="1000" value="15000"></div>
+
+    <div class="result">
+      <div class="lbl">Your emergency fund target</div>
+      <div class="big" id="target-out">₹0</div>
+      <div class="result-grid">
+        <div><span>Recommended cover</span><b id="months-out">—</b></div>
+        <div><span>Monthly burn (essentials + EMI)</span><b id="burn-out">—</b></div>
+        <div><span>Time to build</span><b id="build-out">—</b></div>
+      </div>
+      <p id="why-out" style="margin-top:14px; font-size:14px; color:#cfe3d8;"></p>
+    </div>
+  </div>
+
+  <div class="formula">
+    <strong>The formula (published, like everything here):</strong><br>
+    <code>Months = 3 + (EMI &gt; 30% of essentials ? 1 : 0) + (dependents ≥ 2 ? 1 : 0) + (self-employed or freelancer ? 1 : 0)</code>, capped at 12.<br>
+    <code>Target = months × (monthly essentials + monthly EMIs)</code> · <code>Build time = target ÷ monthly savings</code>.<br>
+    Government/PSU jobs start at the 3-month base because income is the most stable; variable incomes get the extra month because dry spells are normal, not exceptional.
+  </div>
+
+  <div class="illustrative">
+    <b>Illustrative example.</b> Arjun spends ₹50,000/month on essentials, pays ₹25,000 in EMIs (that's 50% of essentials → +1 month), has 2 dependents (+1 month), and freelances (+1 month). Base 3 + 3 = 6 months. Target = 6 × ₹75,000 = ₹4,50,000. Saving ₹15,000/month, he builds it in 30 months — which is why starting today beats starting "someday."
+  </div>
+
+  <div class="assume">
+    <strong>Assumptions &amp; limits:</strong> "essentials" means non-negotiable spending only; the tool assumes no existing liquid savings and excludes investments you won't touch. The job-type adjustments are rules of thumb, not actuarial science. Revisit the number yearly or after any big life change — marriage, kids, a home loan, a job switch.
+  </div>
+
+  <div class="article">
+    <h2>Where should the fund actually sit?</h2>
+    <p>Two tests: can you reach it within a day or two, and will it still be there in a market crash? That rules out equity and long lock-in FDs. What passes: a <strong>separate savings account</strong> (a sweep-in or flexi-deposit earns a bit more while staying liquid), or a <strong>liquid mutual fund</strong> with instant redemption. "Separate" matters more than the exact vehicle — money parked in your daily spending account gets spent.</p>
+
+    <h2>When is it okay to break the glass?</h2>
+    <p>Income shocks and health shocks: job loss, a medical emergency, an urgent repair you can't postpone. Not vacations, not the latest phone, not a wedding you "had to" attend. The discipline that makes the fund work is the same discipline that decides when to touch it. And the rule after any withdrawal: rebuilding the fund outranks every other financial goal until it's whole again.</p>
+
+    <h2>Should I kill debt first or build the fund first?</h2>
+    <p>Sequence it: <strong>one month of essentials first</strong> (a starter buffer so small shocks don't become new debt), then attack high-interest debt like credit cards and personal loans aggressively, then build the full fund. Doing the full fund before clearing 36%-interest debt means you're earning 6% while paying 36% — the math never works.</p>
+  </div>
+
+  <div class="faq">
+    <h2 style="font-family:Georgia,serif; color:var(--green-dark); margin-bottom:14px;">Questions, answered</h2>
+    <details><summary>Where should I keep my emergency fund in India?</summary><p>Somewhere safe and reachable within a day or two: a separate savings account, ideally with a sweep-in or flexi deposit, or a liquid mutual fund. Not in equity, not locked in long fixed deposits with penalties, and not in the account you spend from daily.</p></details>
+    <details><summary>When is it okay to use the emergency fund?</summary><p>For income or health shocks: job loss, medical emergencies, urgent home repairs. Not for vacations, gadgets, or weddings. And rebuild it immediately afterwards, before resuming other investing.</p></details>
+    <details><summary>Should I clear debt first or build the emergency fund first?</summary><p>Do both in order. Keep a small starter buffer of about one month of essentials first, then attack high-interest debt aggressively, then build the full fund. An emergency with zero buffer usually becomes more debt.</p></details>
+    <details><summary>Isn't keeping cash idle a waste?</summary><p>It is insurance, not investment. The return is not being forced to borrow at 36% or redeem long-term investments at the worst possible moment. Judge it against the cost of the alternative, not against equity returns.</p></details>
+  </div>
+
+  <div class="article">
+    <h2>Authoritative sources</h2>
+    <ul>
+      <li><a href="https://www.rbi.org.in">RBI</a> — financial literacy resources on savings and contingency planning.</li>
+      <li><a href="https://www.sebi.gov.in">SEBI</a> — investor education on liquid funds and risk-appropriate parking.</li>
+    </ul>
+    <h2>Keep going</h2>
+    <ul>
+      <li><a href="emi.html">EMI calculator</a> — EMIs eating your savings capacity? See the true cost.</li>
+      <li><a href="sip.html">SIP calculator</a> — once the fund is built, put the surplus to work.</li>
+      <li><a href="card-value.html">Credit card value checker</a> — stop paying fees that don't pay you back.</li>
+    </ul>
+  </div>
+
+  <section id="newsletter">
+    <div class="news">
+      <h2>The Sahi Letter</h2>
+      <p>One money truth every Sunday. Read in 3 minutes. No spam — obviously.</p>
+      <form id="nl-form">
+        <input type="email" placeholder="you@example.com" required>
+        <button class="btn" type="submit">Join free</button>
+      </form>
+      <div class="micro" id="nl-thanks" style="display:none; font-weight:700; color:var(--green);">You're in. First letter lands Sunday. 📬</div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>PaisaSahi</h4>
+        <p>India's honest money guide.<br>पैसा सही — money, done right.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="emi.html">Calculators</a>
+        <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+        <a href="../guides/new-vs-old-regime-fy2026-27.html">Guides</a>
+        <a href="../our-promise.html">Our Promise</a>
+      </div>
+      <div>
+        <h4>Fine print</h4>
+        <a href="../how-we-make-money.html">How we make money</a>
+        <a href="../methodology.html">Ranking methodology</a>
+        <a href="../our-promise.html">Privacy: we don't sell data</a>
+      </div>
+    </div>
+    <div class="fine">
+      PaisaSahi is an education website, not a SEBI-registered investment adviser or a bank. Content is for information only — not financial advice. We may earn affiliate commissions; this never affects rankings.
+    </div>
+  </div>
+</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const fmt = n => '₹' + Math.round(n).toLocaleString('en-IN');
+function calc(){
+  const exp = +$('in-exp').value;
+  const emi = +$('in-emi').value;
+  const dep = +$('in-dep').value;
+  const job = $('in-job').value;
+  const save = +$('in-save').value;
+  $('o-exp').textContent = fmt(exp);
+  $('o-emi').textContent = fmt(emi);
+  $('o-save').textContent = fmt(save);
+
+  let months = 3;
+  const reasons = ['3-month base'];
+  if (exp > 0 && emi > 0.30 * exp) { months += 1; reasons.push('EMIs over 30% of essentials (+1)'); }
+  if (dep >= 2) { months += 1; reasons.push(dep + ' dependents (+1)'); }
+  if (job === 'self' || job === 'free') { months += 1; reasons.push('variable income (+1)'); }
+  if (months > 12) months = 12;
+
+  const burn = exp + emi;
+  const target = months * burn;
+  const buildMonths = Math.ceil(target / save);
+
+  $('target-out').textContent = fmt(target);
+  $('months-out').textContent = months + ' months';
+  $('burn-out').textContent = fmt(burn) + '/mo';
+  $('build-out').textContent = buildMonths + (buildMonths === 1 ? ' month' : ' months');
+  $('why-out').textContent = 'Why ' + months + ' months? ' + reasons.join(' · ') + '.';
+}
+['in-exp','in-emi','in-dep','in-job','in-save'].forEach(id => {
+  $(id).addEventListener(id === 'in-dep' || id === 'in-job' ? 'change' : 'input', calc);
+});
+calc();
+$('nl-form').addEventListener('submit', e => {
+  e.preventDefault();
+  $('nl-form').style.display = 'none';
+  $('nl-thanks').style.display = 'block';
+});
+</script>
+</body>
+</html>

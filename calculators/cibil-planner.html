@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIBIL 90-Day Action Planner — Raise Your Score Step by Step | PaisaSahi</title>
+<meta name="description" content="Answer 5 questions about your credit situation and get a personalized 90-day CIBIL improvement plan: what to fix in days 1–30, 31–60, and 61–90. Educational tool, no sign-up, no spam.">
+<link rel="stylesheet" href="../assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How fast can my CIBIL score improve?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Utilization changes usually show up within one or two bureau update cycles, since lenders typically report monthly, so roughly 30 to 60 days. Payment-history damage takes longer: a missed payment can weigh on your report for years, though its impact fades with time."}
+    },
+    {
+      "@type": "Question",
+      "name": "Does checking my own CIBIL score hurt it?",
+      "acceptedAnswer": {"@type": "Answer", "text": "No. Checking your own report is a soft inquiry and does not affect your score. Only lender-initiated checks when you apply for credit, called hard inquiries, can cause a small temporary dip."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is a good CIBIL score in India?",
+      "acceptedAnswer": {"@type": "Answer", "text": "CIBIL scores run from 300 to 900. Lenders generally treat 750 and above as a strong score for approvals at better terms. Below 650, approvals get noticeably harder and costlier."}
+    },
+    {
+      "@type": "Question",
+      "name": "Will closing an old credit card help my score?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Usually the opposite. Closing a card raises your utilization ratio because you lose that credit limit, and it shortens your average account age over time. Keep old no-fee cards open with occasional small use."}
+    },
+    {
+      "@type": "Question",
+      "name": "How often should I check my credit report?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Quarterly is plenty for most people. You are entitled to one free full credit report per year from each credit bureau in India, so space them across bureaus to keep a free eye on your file year-round."}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="ribbon">No spam calls · No bought rankings · <b>Free forever</b></div>
+
+<header class="site">
+  <div class="nav">
+    <a class="logo" href="../index.html">Paisa<span>Sahi</span></a>
+    <div class="nav-links">
+      <a href="../calculators/emi.html">Calculators</a>
+      <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+      <a href="../guides/new-vs-old-regime-fy2026-27.html">Guides</a>
+      <a href="../our-promise.html">Our Promise</a>
+      <a class="btn" href="#newsletter">Get the letter</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="wrap-narrow">
+
+  <div class="page-head">
+    <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="../calculators/emi.html">Calculators</a> › CIBIL planner</div>
+    <div class="kicker">Calculator</div>
+    <h1>Your 90-day CIBIL improvement plan</h1>
+    <p class="lede">Five questions about your credit situation. In return: a phased action plan — what to fix in days 1–30, 31–60, and 61–90. Built from simple, published rules, not a black box.</p>
+    <div class="answer-box">
+      <strong>The one-line answer:</strong> most score improvement comes from three levers — <strong>keep utilization under 30%, never miss a payment, and let old accounts age</strong>. This planner turns your situation into a dated to-do list for each lever.
+    </div>
+    <p class="updated">Updated: October 2026</p>
+  </div>
+
+  <div class="calc">
+    <h2>Your credit snapshot</h2>
+    <p class="hint">Answer honestly — nothing leaves your browser. Then hit "Generate my plan."</p>
+
+    <div class="field"><label for="in-band">Current score band</label>
+      <select id="in-band">
+        <option value="low">Below 650</option>
+        <option value="mid" selected>650–700</option>
+        <option value="fair">701–750</option>
+        <option value="good">Above 750</option>
+        <option value="unknown">I don't know</option>
+      </select></div>
+
+    <div class="field"><label>Credit utilization (balances ÷ total limits) <output id="o-util">45%</output></label>
+      <input type="range" id="in-util" min="0" max="100" step="5" value="45"></div>
+
+    <div class="field"><label for="in-missed">Missed / late payments in the last 12 months</label>
+      <select id="in-missed">
+        <option value="0" selected>None</option>
+        <option value="1">1</option>
+        <option value="2">2 or more</option>
+      </select></div>
+
+    <div class="field"><label for="in-accts">Active credit accounts (cards + loans)</label>
+      <select id="in-accts">
+        <option value="0">None</option>
+        <option value="1" selected>1–2</option>
+        <option value="2">3–5</option>
+        <option value="3">6 or more</option>
+      </select></div>
+
+    <div class="field"><label for="in-age">Age of your oldest account</label>
+      <select id="in-age">
+        <option value="0">Less than 1 year</option>
+        <option value="1" selected>1–3 years</option>
+        <option value="2">3–5 years</option>
+        <option value="3">5+ years</option>
+      </select></div>
+
+    <button class="btn" id="gen-btn" style="width:100%; padding:14px; font-size:17px;">Generate my 90-day plan</button>
+
+    <div id="plan-output" style="display:none; margin-top:24px;"></div>
+  </div>
+
+  <div class="formula">
+    <strong>How the plan is built (the rules, published):</strong><br>
+    Utilization above 30% → paydown actions land in Phase 1. Any missed payment in 12 months → autopay + "no new applications" actions. Zero active accounts → the credit-building path (secured/FD-backed card). Oldest account under 1 year → keep-old-cards actions. Score below 650 (or unknown) → dispute-errors-first. Everything not triggered becomes maintenance.
+  </div>
+
+  <div class="assume">
+    <strong>Assumptions &amp; limits:</strong> this is an educational tool, not a guarantee — nobody can promise a specific score by a specific date. Scores move on bureau update cycles: lenders typically report monthly, so allow 30–60 days to see utilization changes. Disputes with bureaus take additional weeks. If a "score improvement agent" promises otherwise for a fee, walk away.
+  </div>
+
+  <div class="article">
+    <h2>How fast can my CIBIL score actually improve?</h2>
+    <p>It depends which lever you're pulling. Utilization is the fast one: pay down balances and the improvement usually shows within one or two bureau cycles — roughly 30–60 days, since lenders report monthly. Payment history is the slow one: a missed payment can weigh on your report for years, though its sting fades as newer clean months pile up. Anyone promising "+100 points in 30 days, guaranteed" is selling you something.</p>
+
+    <h2>Does checking my own score hurt it?</h2>
+    <p>No — this is the most persistent myth in Indian personal finance. Checking your own report is a <em>soft inquiry</em> and leaves your score untouched. What dings you (slightly, temporarily) are <em>hard inquiries</em>: lender-initiated checks when you apply for a card or loan. So check freely, but apply selectively — five card applications in a month looks desperate to the algorithm, because it is.</p>
+
+    <h2>What counts as a "good" score?</h2>
+    <p>CIBIL scores run 300–900. As a rule of thumb Indian lenders use: <strong>750+</strong> is strong (approvals, better rates), <strong>700–750</strong> is workable, <strong>650–700</strong> gets harder, and <strong>below 650</strong> means most prime lenders will decline or price you steeply. These bands are the industry's, not ours — and different lenders draw their lines differently.</p>
+  </div>
+
+  <div class="faq">
+    <h2 style="font-family:Georgia,serif; color:var(--green-dark); margin-bottom:14px;">Questions, answered</h2>
+    <details><summary>How fast can my CIBIL score improve?</summary><p>Utilization changes usually show up within one or two bureau update cycles — roughly 30 to 60 days, since lenders report monthly. Payment-history damage takes longer: a missed payment can weigh on your report for years, though its impact fades with time.</p></details>
+    <details><summary>Does checking my own CIBIL score hurt it?</summary><p>No. Checking your own report is a soft inquiry and does not affect your score. Only lender-initiated checks when you apply for credit (hard inquiries) can cause a small, temporary dip.</p></details>
+    <details><summary>What is a good CIBIL score in India?</summary><p>CIBIL scores run from 300 to 900. Lenders generally treat 750 and above as a strong score for approvals at better terms. Below 650, approvals get noticeably harder and costlier.</p></details>
+    <details><summary>Will closing an old credit card help my score?</summary><p>Usually the opposite. Closing a card raises your utilization ratio because you lose that credit limit, and it shortens your average account age over time. Keep old no-fee cards open with occasional small use.</p></details>
+    <details><summary>How often should I check my credit report?</summary><p>Quarterly is plenty for most people. You are entitled to one free full credit report per year from each credit bureau in India — space them across bureaus to keep a free eye on your file year-round.</p></details>
+  </div>
+
+  <div class="article">
+    <h2>Authoritative sources</h2>
+    <ul>
+      <li><a href="https://www.cibil.com">TransUnion CIBIL</a> — check your free credit report and score factors.</li>
+      <li><a href="https://www.rbi.org.in">RBI</a> — rules on free credit reports and fair reporting practices.</li>
+    </ul>
+    <h2>Keep going</h2>
+    <ul>
+      <li><a href="card-value.html">Credit card value checker</a> — once the score is up, pick a card that's worth its fee.</li>
+      <li><a href="emi.html">EMI calculator</a> — new loan? See the true cost first.</li>
+      <li><a href="../guides/cibil-90-day-plan.html">CIBIL 90-day plan: the full guide</a> — the deep version of this planner.</li>
+    </ul>
+  </div>
+
+  <section id="newsletter">
+    <div class="news">
+      <h2>The Sahi Letter</h2>
+      <p>One money truth every Sunday. Read in 3 minutes. No spam — obviously.</p>
+      <form id="nl-form">
+        <input type="email" placeholder="you@example.com" required>
+        <button class="btn" type="submit">Join free</button>
+      </form>
+      <div class="micro" id="nl-thanks" style="display:none; font-weight:700; color:var(--green);">You're in. First letter lands Sunday. 📬</div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>PaisaSahi</h4>
+        <p>India's honest money guide.<br>पैसा सही — money, done right.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="emi.html">Calculators</a>
+        <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+        <a href="../guides/new-vs-old-regime-fy2026-27.html">Guides</a>
+        <a href="../our-promise.html">Our Promise</a>
+      </div>
+      <div>
+        <h4>Fine print</h4>
+        <a href="../how-we-make-money.html">How we make money</a>
+        <a href="../methodology.html">Ranking methodology</a>
+        <a href="../our-promise.html">Privacy: we don't sell data</a>
+      </div>
+    </div>
+    <div class="fine">
+      PaisaSahi is an education website, not a SEBI-registered investment adviser or a bank. Content is for information only — not financial advice. We may earn affiliate commissions; this never affects rankings.
+    </div>
+  </div>
+</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+let generated = false;
+
+function buildPlan(){
+  const band = $('in-band').value;
+  const util = +$('in-util').value;
+  const missed = $('in-missed').value;
+  const accts = $('in-accts').value;
+  const age = $('in-age').value;
+
+  const p1 = [], p2 = [], p3 = [];
+  const levers = [];
+
+  // Disputes first for low/unknown scores
+  if (band === 'low' || band === 'unknown') {
+    p1.push('Pull your free full credit report and scan for errors — wrong late-payment flags and accounts you don\'t recognise are common. Raise disputes for each; bureaus must resolve them, and corrections can lift a score faster than any habit.');
+    levers.push('report cleanup');
+  }
+  // Utilization
+  if (util > 30) {
+    p1.push('Bring utilization under 30% — currently ' + util + '%. Pay down the highest-utilization card first; this is the single fastest lever you have.');
+    levers.push('utilization under 30%');
+  } else {
+    p2.push('Keep utilization under 30% — you\'re already there (' + util + '%). Spread large purchases across cards rather than maxing one.');
+  }
+  // Missed payments
+  if (missed !== '0') {
+    p1.push('Set autopay for at least the minimum due on every single account — today. One more missed payment resets months of progress.');
+    p2.push('No new credit applications for 90 days. Each application is a hard inquiry; a thin, bruised file can\'t afford them right now.');
+    levers.push('zero missed payments');
+  } else {
+    p1.push('Protect your clean payment record: autopay the minimum due on every account, then manually pay the rest. Autopilot beats willpower.');
+  }
+  // Thin file
+  if (accts === '0') {
+    p2.push('Start building history: a secured (FD-backed) credit card is the usual entry path. Use under 30% of the limit and pay in full every month — the deposit is refundable, the history is the point.');
+    levers.push('building a credit history');
+  }
+  // Young file
+  if (age === '0') {
+    p2.push('Do not close your oldest card — account age matters, and your file is young. Keep it alive with one small recurring payment.');
+  }
+  // Maintenance / good band
+  if (band === 'good') {
+    p3.push('You\'re in the top band — this phase is defense. Check your report quarterly, keep utilization low, and don\'t co-sign loans you wouldn\'t take yourself.');
+  }
+
+  // Universal phase fillers
+  p1.push('Stop applying for new credit until day 90 — every hard inquiry costs a few points you\'re trying to earn back.');
+  p2.push('If any card issuer offers a limit increase without a hard inquiry, take it — same spending on a bigger limit means lower utilization.');
+  p3.push('Re-check your score at day 60 and day 90. Expect utilization wins by day 60; payment-history repair shows over quarters, not weeks.');
+  p3.push('Going forward: one free report per bureau per year, spaced quarterly, keeps you watched without paying anyone.');
+
+  const phase = (title, sub, items) =>
+    '<div class="step"><h3>' + title + '</h3><p style="margin-bottom:10px;">' + sub + '</p><ul style="margin-left:18px;">' +
+    items.map(i => '<li style="margin-bottom:8px; font-size:15px;">' + i + '</li>').join('') + '</ul></div>';
+
+  $('plan-output').innerHTML =
+    '<p style="margin-bottom:16px; font-size:16px;"><strong>Your focus levers:</strong> ' +
+    (levers.length ? levers.join(' · ') : 'maintenance — protect what you\'ve built') + '.</p>' +
+    '<div class="steps">' +
+    phase('Days 1–30 — stop the bleeding', 'Quick wins and damage control.', p1) +
+    phase('Days 31–60 — build the habits', 'Systems that run without willpower.', p2) +
+    phase('Days 61–90 — consolidate', 'Lock in gains and measure.', p3) +
+    '</div>';
+  $('plan-output').style.display = 'block';
+  generated = true;
+}
+
+$('gen-btn').addEventListener('click', buildPlan);
+['in-band','in-util','in-missed','in-accts','in-age'].forEach(id => {
+  $(id).addEventListener(id === 'in-util' ? 'input' : 'change', () => {
+    if (id === 'in-util') $('o-util').textContent = $('in-util').value + '%';
+    if (generated) buildPlan();
+  });
+});
+$('nl-form').addEventListener('submit', e => {
+  e.preventDefault();
+  $('nl-form').style.display = 'none';
+  $('nl-thanks').style.display = 'block';
+});
+</script>
+</body>
+</html>

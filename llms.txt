@@ -1,0 +1,21 @@
+# PaisaSahi
+
+> PaisaSahi is India's honest money guide. Free calculators, guides, and product comparisons with published ranking formulas. No spam calls. No bought rankings. Affiliate commissions (typically ₹1,000–3,000 per approved card/loan) never change rankings. Educational content only — not a SEBI-registered adviser.
+
+## Calculators (interactive, free, no sign-up)
+- [EMI Calculator](https://sachinra0805.github.io/paisasahi/calculators/emi.html): Home/car/personal loan EMI with reducing-balance math. Shows monthly EMI, total interest, total payable.
+- [SIP Growth Calculator](https://sachinra0805.github.io/paisasahi/calculators/sip.html): Project SIP maturity value; invested vs gains split.
+- [New vs Old Tax Regime FY 2026-27](https://sachinra0805.github.io/paisasahi/calculators/tax-regime.html): Compares tax under both regimes for salaried individuals; slabs verified October 2026.
+- [Credit Card Value Checker](https://sachinra0805.github.io/paisasahi/calculators/card-value.html): Rewards minus annual fee for the user's own spending pattern; breakeven analysis.
+- [CIBIL 90-Day Planner](https://sachinra0805.github.io/paisasahi/calculators/cibil-planner.html): Personalized 90-day credit-score improvement plan from a 5-question input.
+- [Emergency Fund Sizer](https://sachinra0805.github.io/paisasahi/calculators/emergency-fund.html): Rule-based emergency fund target from expenses, EMIs, dependents, job type.
+
+## Guides
+- [Best credit cards in India 2026 — ranked by math, not payouts](https://sachinra0805.github.io/paisasahi/guides/best-credit-cards-2026.html): Net-value ranking formula on standardized spend profiles; illustrative examples labeled.
+- [CIBIL score: the 90-day improvement plan](https://sachinra0805.github.io/paisasahi/guides/cibil-90-day-plan.html): Utilization, autopay, disputes, secured-card path.
+- [New vs old tax regime FY 2026-27](https://sachinra0805.github.io/paisasahi/guides/new-vs-old-regime-fy2026-27.html): Slab tables, breakeven analysis by income level.
+
+## How we operate
+- [Ranking methodology](https://sachinra0805.github.io/paisasahi/methodology.html): The 3-step process — list everyone, score the math, publish the order. Payouts disclosed, never change rankings.
+- [Our promise](https://sachinra0805.github.io/paisasahi/our-promise.html): No spam, no bought rankings, show our work.
+- [How we make money](https://sachinra0805.github.io/paisasahi/how-we-make-money.html): Plain-English affiliate disclosure.

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMI Calculator — Home, Car & Personal Loan | PaisaSahi</title>
+<meta name="description" content="Free EMI calculator for home, car and personal loans in India. See your monthly EMI, total interest and total payable — no sign-up, no spam calls.">
+<link rel="stylesheet" href="../assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is EMI calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "EMI is calculated on a reducing-balance basis: EMI = P × r × (1+r)^n / ((1+r)^n − 1), where P is the loan amount, r is the monthly interest rate (annual rate ÷ 12 ÷ 100), and n is the number of monthly instalments. Interest each month is charged only on the outstanding principal, so the interest portion of your EMI shrinks over time while the principal portion grows."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does prepaying my loan actually help?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Because interest is charged on the outstanding balance, any prepayment directly reduces the principal on which future interest is computed. Even one extra EMI per year can shave years off a long-tenure loan and save lakhs in interest. Check whether your lender charges a prepayment penalty first — many don't on floating-rate home loans."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Fixed vs floating interest rate — which is better?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Neither is universally better. A fixed rate gives payment certainty for the whole tenure; a floating rate moves with the RBI's repo rate, so it usually starts lower but can rise. If you value predictability, fixed wins. If you can absorb rate moves and believe rates will stay flat or fall, floating usually costs less over a long tenure."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is my early EMI mostly interest?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In the early years the outstanding principal is at its highest, so the interest component of each EMI is large. As you repay principal, the interest portion falls and more of each EMI goes toward principal. This is normal amortisation, not a trick — it's exactly why prepaying early in the tenure saves the most interest."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="ribbon">No spam calls &nbsp;·&nbsp; No bought rankings &nbsp;·&nbsp; <b>Free forever</b></div>
+
+<header class="site">
+  <div class="nav">
+    <a class="logo" href="../index.html">Paisa<span>Sahi</span></a>
+    <div class="nav-links">
+      <a href="emi.html">Calculators</a>
+      <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+      <a href="#">Guides</a>
+      <a href="../our-promise.html">Our Promise</a>
+      <a class="btn" href="#">Get the letter</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="emi.html">Calculators</a> › EMI Calculator</div>
+
+  <div class="page-head">
+    <div class="kicker">Calculator</div>
+    <h1>EMI Calculator</h1>
+    <p class="lede">Home loan, car loan, personal loan — drag the sliders and see the true cost before you sign. No phone number required, obviously.</p>
+    <div class="updated">Updated: October 2026</div>
+  </div>
+
+  <div class="answer-box">
+    <strong>The one-line answer:</strong> your EMI is set by three things — loan amount, interest rate, and tenure. On a reducing-balance loan, a <strong>lower rate or shorter tenure</strong> cuts total interest far more than haggling over processing fees ever will.
+  </div>
+
+  <div class="calc">
+    <h2>Calculate your EMI</h2>
+    <p class="hint">Move the sliders — the numbers update live.</p>
+    <div class="field">
+      <label>Loan amount <output id="o-amt">₹50,00,000</output></label>
+      <input type="range" id="r-amt" min="100000" max="20000000" step="100000" value="5000000" aria-label="Loan amount">
+    </div>
+    <div class="field">
+      <label>Interest rate <output id="o-rate">8.5% p.a.</output></label>
+      <input type="range" id="r-rate" min="6" max="18" step="0.1" value="8.5" aria-label="Interest rate per annum">
+    </div>
+    <div class="field">
+      <label>Tenure <output id="o-yrs">20 years</output></label>
+      <input type="range" id="r-yrs" min="1" max="30" step="1" value="20" aria-label="Loan tenure in years">
+    </div>
+    <div class="result">
+      <div class="lbl">Monthly EMI</div>
+      <div class="big" id="emi-out">₹43,391</div>
+      <div class="result-grid">
+        <div><span>Total interest</span><b id="int-out">₹54,13,879</b></div>
+        <div><span>Total payable</span><b id="tot-out">₹1,04,13,879</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="formula">
+    <strong>The formula we use:</strong><br>
+    <code>EMI = P × r × (1+r)<sup>n</sup> ÷ ((1+r)<sup>n</sup> − 1)</code><br>
+    where <code>P</code> = loan amount, <code>r</code> = monthly rate (annual ÷ 12 ÷ 100), <code>n</code> = number of monthly payments. Reducing-balance, monthly rests — the same method Indian lenders use.
+  </div>
+
+  <div class="assume">
+    <strong>Assumptions:</strong> fixed interest rate for the full tenure; no prepayments; processing fees, GST, and loan insurance are <em>not</em> included (ask your lender for the all-in cost). Floating-rate loans will differ as rates move with the RBI's repo rate — see <a href="https://www.rbi.org.in">rbi.org.in</a> for the current policy rate.
+  </div>
+
+  <div class="article">
+    <h2>How is EMI calculated?</h2>
+    <p>Every EMI has two parts: interest on what you still owe, plus a slice of principal. In the early years the outstanding balance is high, so most of your EMI is interest. Over time the balance falls, the interest portion shrinks, and more of each payment attacks the principal. Same EMI every month, quietly changing composition underneath.</p>
+
+    <h2>What moves the needle most?</h2>
+    <p>Tenure is the silent killer. Stretching a home loan from 20 to 30 years drops the EMI — but can add 60–70% more total interest. A 1% lower rate on a 20-year ₹50 lakh loan saves roughly ₹7–8 lakh in interest. Before comparing lenders, compare these two levers; the processing-fee difference is usually noise.</p>
+
+    <div class="faq">
+      <h2>Common questions</h2>
+      <details>
+        <summary>How is EMI calculated?</summary>
+        <p>On a reducing-balance basis: EMI = P × r × (1+r)<sup>n</sup> ÷ ((1+r)<sup>n</sup> − 1), where P is the loan amount, r the monthly interest rate, and n the number of instalments. Interest is charged only on the outstanding principal each month.</p>
+      </details>
+      <details>
+        <summary>Does prepaying my loan actually help?</summary>
+        <p>Yes. Prepayments cut the principal that future interest is computed on, so early prepayments save the most. Even one extra EMI a year can shave years off a long loan. Check for prepayment penalties first — floating-rate home loans in India typically have none.</p>
+      </details>
+      <details>
+        <summary>Fixed vs floating rate — which is better?</summary>
+        <p>Fixed gives certainty; floating moves with the RBI repo rate and usually starts lower. Neither wins universally — pick fixed if you need predictable payments, floating if you can ride rate cycles.</p>
+      </details>
+      <details>
+        <summary>Why is my early EMI mostly interest?</summary>
+        <p>Because the outstanding principal is highest at the start, the interest slice of each EMI is largest then. It's normal amortisation — and exactly why prepaying early saves the most interest.</p>
+      </details>
+    </div>
+
+    <h2>Keep exploring</h2>
+    <div class="grid">
+      <div class="card"><div class="icon">📈</div><h3>SIP Calculator</h3><p>Growing money instead of borrowing it? See what a monthly SIP becomes.</p><a href="sip.html">Calculate →</a></div>
+      <div class="card"><div class="icon">🧾</div><h3>Tax Regime Comparator</h3><p>Salaried? Find whether the new or old tax regime wins for FY 2026-27.</p><a href="tax-regime.html">Compare →</a></div>
+      <div class="card"><div class="icon">⚖️</div><h3>Why trust our numbers</h3><p>Every formula published, every assumption labelled. That's the whole model.</p><a href="../methodology.html">Our methodology →</a></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>PaisaSahi</h4>
+        <p>India's honest money guide.<br>पैसा सही — money, done right.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="emi.html">Calculators</a>
+        <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+        <a href="../our-promise.html">Our Promise</a>
+      </div>
+      <div>
+        <h4>Fine print</h4>
+        <a href="../how-we-make-money.html">How we make money</a>
+        <a href="../methodology.html">Ranking methodology</a>
+      </div>
+    </div>
+    <div class="fine">
+      PaisaSahi is an education website, not a SEBI-registered investment adviser or a bank. Content is for information only — not financial advice. We may earn affiliate commissions; this never affects rankings.
+    </div>
+  </div>
+</footer>
+
+<script>
+  const fmt = n => '₹' + Math.round(n).toLocaleString('en-IN');
+  const rAmt = document.getElementById('r-amt'),
+        rRate = document.getElementById('r-rate'),
+        rYrs = document.getElementById('r-yrs');
+  function calc(){
+    const P = +rAmt.value, annual = +rRate.value, yrs = +rYrs.value;
+    const r = annual/12/100, n = yrs*12;
+    const emi = r === 0 ? P/n : P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+    const total = emi*n, interest = total - P;
+    document.getElementById('o-amt').textContent = fmt(P);
+    document.getElementById('o-rate').textContent = annual.toFixed(1) + '% p.a.';
+    document.getElementById('o-yrs').textContent = yrs + (yrs === 1 ? ' year' : ' years');
+    document.getElementById('emi-out').textContent = fmt(emi);
+    document.getElementById('int-out').textContent = fmt(interest);
+    document.getElementById('tot-out').textContent = fmt(total);
+  }
+  [rAmt, rRate, rYrs].forEach(el => el.addEventListener('input', calc));
+  calc();
+</script>
+</body>
+</html>

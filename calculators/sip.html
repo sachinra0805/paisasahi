@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIP Calculator — See What Your Monthly SIP Becomes | PaisaSahi</title>
+<meta name="description" content="Free SIP calculator for Indian mutual funds. See invested amount, estimated gains and maturity value for your monthly SIP — no sign-up, no spam calls.">
+<link rel="stylesheet" href="../assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a SIP?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A Systematic Investment Plan (SIP) invests a fixed amount — usually monthly — into a mutual fund. Because you buy more units when markets are low and fewer when they're high, you get rupee-cost averaging automatically. It's the default way most Indian investors build long-term wealth."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the return on a SIP guaranteed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Mutual funds are market-linked, so returns vary and can be negative over short periods. SIP calculators assume a constant annual return purely for illustration. Treat the output as a scenario, not a promise — and be deeply suspicious of anyone who guarantees equity returns."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a step-up SIP?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A step-up (or top-up) SIP increases your monthly investment by a fixed percentage each year — typically 10%, roughly in line with salary growth. Because the increases compound over time, a step-up SIP can build a dramatically larger corpus than a flat SIP for only modestly higher total investment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What return should I assume in a SIP calculator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Many planners illustrate long-horizon equity SIPs at 10–12% per annum, but that is an assumption, not a forecast. Use a conservative figure, run a second scenario 2–3% lower, and remember that past performance does not guarantee future returns. Your plan should survive the lower scenario."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="ribbon">No spam calls &nbsp;·&nbsp; No bought rankings &nbsp;·&nbsp; <b>Free forever</b></div>
+
+<header class="site">
+  <div class="nav">
+    <a class="logo" href="../index.html">Paisa<span>Sahi</span></a>
+    <div class="nav-links">
+      <a href="emi.html">Calculators</a>
+      <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+      <a href="#">Guides</a>
+      <a href="../our-promise.html">Our Promise</a>
+      <a class="btn" href="#">Get the letter</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="emi.html">Calculators</a> › SIP Calculator</div>
+
+  <div class="page-head">
+    <div class="kicker">Calculator</div>
+    <h1>SIP Calculator</h1>
+    <p class="lede">What does your monthly SIP actually become? Run the numbers — with the assumptions printed right next to them, not buried in footnotes.</p>
+    <div class="updated">Updated: October 2026</div>
+  </div>
+
+  <div class="answer-box">
+    <strong>The one-line answer:</strong> a <strong>₹10,000 monthly SIP</strong> growing at an assumed <strong>12% p.a. for 10 years</strong> becomes roughly <strong>₹23.2 lakh</strong> (₹12 lakh invested). But that 12% is an assumption, not a promise — markets don't move in straight lines.
+  </div>
+
+  <div class="calc">
+    <h2>Calculate your SIP growth</h2>
+    <p class="hint">Move the sliders — the numbers update live.</p>
+    <div class="field">
+      <label>Monthly investment <output id="o-amt">₹10,000</output></label>
+      <input type="range" id="r-amt" min="500" max="200000" step="500" value="10000" aria-label="Monthly SIP amount">
+    </div>
+    <div class="field">
+      <label>Expected return <output id="o-ret">12% p.a.</output></label>
+      <input type="range" id="r-ret" min="1" max="20" step="0.5" value="12" aria-label="Expected annual return">
+    </div>
+    <div class="field">
+      <label>Time period <output id="o-yrs">10 years</output></label>
+      <input type="range" id="r-yrs" min="1" max="40" step="1" value="10" aria-label="Investment period in years">
+    </div>
+    <div class="result">
+      <div class="lbl">Maturity value</div>
+      <div class="big" id="fv-out">₹23,23,391</div>
+      <div class="result-grid">
+        <div><span>Invested</span><b id="inv-out">₹12,00,000</b></div>
+        <div><span>Est. gains</span><b id="gain-out">₹11,23,391</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="formula">
+    <strong>The formula we use:</strong><br>
+    <code>FV = M × [((1+r)<sup>n</sup> − 1) ÷ r] × (1+r)</code><br>
+    where <code>M</code> = monthly investment, <code>r</code> = monthly return (annual ÷ 12 ÷ 100), <code>n</code> = number of months. This is the future value of a monthly annuity with payments at the start of each month.
+  </div>
+
+  <div class="assume">
+    <strong>Assumptions — read these:</strong> returns are assumed <em>constant</em> every month; real markets are volatile and this smooths all of that away. Figures are <em>before</em> fund expense ratios, exit loads, and taxes on gains. This is a scenario illustrator, not a prediction. For scheme details, check <a href="https://www.amfiindia.com">amfiindia.com</a> and <a href="https://www.sebi.gov.in">sebi.gov.in</a>.
+  </div>
+
+  <div class="article">
+    <h2>What is a SIP, really?</h2>
+    <p>A Systematic Investment Plan puts a fixed sum into a mutual fund every month. When markets fall you automatically buy more units; when they rise you buy fewer. That rupee-cost averaging is the entire magic — no timing, no tips, just consistency. It's boring, which is why it works.</p>
+
+    <h2>Why time matters more than timing</h2>
+    <p>Compounding needs years, not cleverness. A ₹10,000 SIP at an assumed 12% becomes ~₹23 lakh in 10 years — but ~₹50 lakh in 15 years and ~₹1 crore in 20 years, on only 1.5–2× the invested amount. The gains curve bends upward late. Starting five years earlier beats picking a slightly better fund, almost every time.</p>
+
+    <div class="faq">
+      <h2>Common questions</h2>
+      <details>
+        <summary>What is a SIP?</summary>
+        <p>A fixed amount invested at regular intervals — usually monthly — into a mutual fund. You get rupee-cost averaging automatically: more units when markets are low, fewer when high.</p>
+      </details>
+      <details>
+        <summary>Is the return guaranteed?</summary>
+        <p>No. Mutual funds are market-linked; returns vary and can be negative over short periods. This calculator assumes a constant return purely for illustration. Anyone guaranteeing equity returns is selling something.</p>
+      </details>
+      <details>
+        <summary>What is a step-up SIP?</summary>
+        <p>Increasing your SIP by a fixed percentage (often 10%) each year, roughly matching salary growth. The increases compound, so a step-up SIP builds a far larger corpus than a flat one for modestly higher total investment.</p>
+      </details>
+      <details>
+        <summary>What return should I assume?</summary>
+        <p>Many planners illustrate long-horizon equity SIPs at 10–12% p.a. — an assumption, not a forecast. Run a second scenario 2–3% lower and make sure your plan survives that one too.</p>
+      </details>
+    </div>
+
+    <h2>Keep exploring</h2>
+    <div class="grid">
+      <div class="card"><div class="icon">🏠</div><h3>EMI Calculator</h3><p>Paying EMIs too? See the true cost of your loans before you sign.</p><a href="emi.html">Calculate →</a></div>
+      <div class="card"><div class="icon">🧾</div><h3>Tax Regime Comparator</h3><p>Salaried? Find whether the new or old tax regime wins for FY 2026-27.</p><a href="tax-regime.html">Compare →</a></div>
+      <div class="card"><div class="icon">⚖️</div><h3>Why trust our numbers</h3><p>Every formula published, every assumption labelled. That's the whole model.</p><a href="../methodology.html">Our methodology →</a></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>PaisaSahi</h4>
+        <p>India's honest money guide.<br>पैसा सही — money, done right.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="emi.html">Calculators</a>
+        <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+        <a href="../our-promise.html">Our Promise</a>
+      </div>
+      <div>
+        <h4>Fine print</h4>
+        <a href="../how-we-make-money.html">How we make money</a>
+        <a href="../methodology.html">Ranking methodology</a>
+      </div>
+    </div>
+    <div class="fine">
+      PaisaSahi is an education website, not a SEBI-registered investment adviser or a bank. Content is for information only — not financial advice. Mutual fund investments are subject to market risks. We may earn affiliate commissions; this never affects rankings.
+    </div>
+  </div>
+</footer>
+
+<script>
+  const fmt = n => '₹' + Math.round(n).toLocaleString('en-IN');
+  const rAmt = document.getElementById('r-amt'),
+        rRet = document.getElementById('r-ret'),
+        rYrs = document.getElementById('r-yrs');
+  function calc(){
+    const M = +rAmt.value, annual = +rRet.value, yrs = +rYrs.value;
+    const r = annual/12/100, n = yrs*12;
+    const fv = r === 0 ? M*n : M*((Math.pow(1+r,n)-1)/r)*(1+r);
+    const invested = M*n, gains = fv - invested;
+    document.getElementById('o-amt').textContent = fmt(M);
+    document.getElementById('o-ret').textContent = annual.toFixed(1).replace('.0','') + '% p.a.';
+    document.getElementById('o-yrs').textContent = yrs + (yrs === 1 ? ' year' : ' years');
+    document.getElementById('fv-out').textContent = fmt(fv);
+    document.getElementById('inv-out').textContent = fmt(invested);
+    document.getElementById('gain-out').textContent = fmt(gains);
+  }
+  [rAmt, rRet, rYrs].forEach(el => el.addEventListener('input', calc));
+  calc();
+</script>
+</body>
+</html>

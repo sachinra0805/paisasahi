@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New vs Old Tax Regime Calculator FY 2026-27 | PaisaSahi</title>
+<meta name="description" content="Compare new vs old tax regime for FY 2026-27 (AY 2027-28). Enter your salary and deductions — see which regime wins, with verified slabs. No sign-up, no spam calls.">
+<link rel="stylesheet" href="../assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which tax regime is better for salaried employees in FY 2026-27?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on your deductions. The new regime (default) has lower slab rates and zero tax up to ₹12 lakh of taxable income, but allows almost no deductions. The old regime keeps 80C, 80D, HRA and other deductions. As a rough rule, the old regime tends to win when total deductions exceed about ₹4 lakh — but HRA and home-loan interest move that line, so run your own numbers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the new tax regime the default option?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The new regime has been the default since FY 2023-24 (now under section 202 of the Income-tax Act, 2025). Salaried individuals can opt out and choose the old regime each year while filing their return; no separate form is needed for most salaried taxpayers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the Section 87A rebate and marginal relief in the new regime?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Under the new regime for FY 2026-27, the Section 87A rebate makes total tax zero for taxable income up to ₹12 lakh. Marginal relief protects those just above ₹12 lakh: the extra tax you pay cannot exceed the amount by which your income crosses ₹12 lakh, so earning slightly more never leaves you worse off."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to submit investment proofs to my employer under the new regime?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The new regime allows almost no deductions, so there are no 80C/80D proofs to submit. You only need to tell your employer which regime you've chosen so they deduct TDS correctly. Under the old regime, you must submit proofs for every deduction you claim."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="ribbon">No spam calls &nbsp;·&nbsp; No bought rankings &nbsp;·&nbsp; <b>Free forever</b></div>
+
+<header class="site">
+  <div class="nav">
+    <a class="logo" href="../index.html">Paisa<span>Sahi</span></a>
+    <div class="nav-links">
+      <a href="emi.html">Calculators</a>
+      <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+      <a href="#">Guides</a>
+      <a href="../our-promise.html">Our Promise</a>
+      <a class="btn" href="#">Get the letter</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="emi.html">Calculators</a> › Tax Regime Comparator</div>
+
+  <div class="page-head">
+    <div class="kicker">Calculator</div>
+    <h1>New vs Old Tax Regime — FY 2026-27</h1>
+    <p class="lede">Enter your salary and deductions. Ten seconds later you'll know which regime keeps more of your money — with the slabs shown, sourced, and dated.</p>
+    <div class="updated">Updated: October 2026 · Slabs verified October 2026</div>
+  </div>
+
+  <div class="answer-box">
+    <strong>The one-line answer:</strong> for FY 2026-27 the <strong>new regime usually wins</strong> unless your deductions are large — roughly <strong>above ₹4 lakh</strong> across 80C, 80D, and HRA. Budget 2026 changed nothing, so last year's math still applies.
+  </div>
+
+  <div class="calc">
+    <h2>Compare your tax</h2>
+    <p class="hint">Adjust the numbers — the verdict updates live.</p>
+    <div class="field">
+      <label>Gross annual salary <output id="o-gross">₹18,00,000</output></label>
+      <input type="range" id="r-gross" min="300000" max="10000000" step="10000" value="1800000" aria-label="Gross annual salary">
+    </div>
+    <div class="field">
+      <label>80C deductions (EPF, PPF, ELSS, LIC…)</label>
+      <input type="number" id="n-80c" value="150000" min="0" max="500000" step="1000">
+    </div>
+    <div class="field">
+      <label>80D deductions (health insurance premium)</label>
+      <input type="number" id="n-80d" value="25000" min="0" max="200000" step="1000">
+    </div>
+    <div class="field">
+      <label>HRA exemption + other deductions</label>
+      <input type="number" id="n-hra" value="200000" min="0" max="2000000" step="1000">
+    </div>
+    <div class="result">
+      <div class="lbl">Verdict</div>
+      <div class="big" id="verdict-out" style="font-size:34px;">New regime wins</div>
+      <div class="result-grid">
+        <div><span>New regime tax</span><b id="new-out">₹1,50,800</b></div>
+        <div><span>Old regime tax</span><b id="old-out">₹2,34,000</b></div>
+        <div><span>You save</span><b id="diff-out">₹83,200</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="formula">
+    <strong>How we compute it:</strong><br>
+    <code>New taxable income = gross salary − ₹75,000 standard deduction</code> (no other deductions allowed).<br>
+    <code>Old taxable income = gross salary − ₹50,000 standard deduction − 80C (capped ₹1.5L) − 80D − HRA/other</code>.<br>
+    Slab tax is applied marginally to each band, then: new regime gets the 87A rebate (zero tax up to ₹12L taxable) with marginal relief just above ₹12L; old regime gets the ₹12,500 87A rebate up to ₹5L taxable. Finally, 4% health &amp; education cess is added to the tax.
+  </div>
+
+  <div class="assume">
+    <strong>Assumptions — read these:</strong> individual taxpayer <em>below 60 years</em>; salaried income only (standard deduction applied); 4% cess included; <em>surcharge not modelled</em> (matters only above ₹50L income); HRA taken at face value — the actual HRA exemption needs a rent-based computation; other deductions like 80TTA, NPS (80CCD), and home-loan interest are not separate inputs (fold them into "HRA + other"); marginal relief applied in simplified form. Verify your final liability on <a href="https://www.incometax.gov.in">incometax.gov.in</a>.
+  </div>
+
+  <div class="article">
+    <h2>What are the slabs for FY 2026-27?</h2>
+    <p>Budget 2026 (presented 1 February 2026) made <strong>no changes</strong> to income-tax slabs under either regime. FY 2026-27 (assessment year 2027-28) carries forward the structure Budget 2025 set for FY 2025-26 — now under the Income-tax Act, 2025 instead of the 1961 Act. Slab rates verified October 2026 against Budget 2026 coverage.</p>
+
+    <h3>New regime slabs — FY 2026-27 (AY 2027-28)</h3>
+    <table>
+      <tr><th>Taxable income</th><th>Rate</th></tr>
+      <tr><td>Up to ₹4,00,000</td><td>Nil</td></tr>
+      <tr><td>₹4,00,001 – ₹8,00,000</td><td>5%</td></tr>
+      <tr><td>₹8,00,001 – ₹12,00,000</td><td>10%</td></tr>
+      <tr><td>₹12,00,001 – ₹16,00,000</td><td>15%</td></tr>
+      <tr><td>₹16,00,001 – ₹20,00,000</td><td>20%</td></tr>
+      <tr><td>₹20,00,001 – ₹24,00,000</td><td>25%</td></tr>
+      <tr><td>Above ₹24,00,000</td><td>30%</td></tr>
+    </table>
+    <p>Plus: ₹75,000 standard deduction for salaried taxpayers, and the 87A rebate making tax zero up to ₹12 lakh of taxable income (with marginal relief just above it). 4% cess applies on the tax.</p>
+
+    <h3>Old regime slabs — FY 2026-27 (AY 2027-28), below 60 years</h3>
+    <table>
+      <tr><th>Taxable income</th><th>Rate</th></tr>
+      <tr><td>Up to ₹2,50,000</td><td>Nil</td></tr>
+      <tr><td>₹2,50,001 – ₹5,00,000</td><td>5%</td></tr>
+      <tr><td>₹5,00,001 – ₹10,00,000</td><td>20%</td></tr>
+      <tr><td>Above ₹10,00,000</td><td>30%</td></tr>
+    </table>
+    <p>Plus: ₹50,000 standard deduction, 80C (up to ₹1.5L), 80D, HRA, home-loan interest and 70+ other deductions — and the ₹12,500 87A rebate making tax zero up to ₹5 lakh of taxable income. 4% cess applies on the tax.</p>
+
+    <h2>So which regime should <em>you</em> pick?</h2>
+    <p>The new regime's lower slabs usually beat the old regime's deductions — until your deductions get big. The crossover sits around ₹4 lakh of total deductions for most salary levels. Big HRA (metro renters), home-loan interest, and maxed-out 80C + 80D + NPS are what push people back to the old regime. If you're near the line, the honest answer is: compute both every year, because salary hikes and rent changes move it.</p>
+
+    <div class="faq">
+      <h2>Common questions</h2>
+      <details>
+        <summary>Which regime is better for salaried employees in FY 2026-27?</summary>
+        <p>Usually the new regime — lower slabs and zero tax up to ₹12L taxable income. The old regime wins when total deductions (80C + 80D + HRA + home-loan interest) cross roughly ₹4 lakh. Run your numbers above; it takes ten seconds.</p>
+      </details>
+      <details>
+        <summary>Is the new regime the default?</summary>
+        <p>Yes, since FY 2023-24 (now section 202 of the Income-tax Act, 2025). Salaried taxpayers can opt for the old regime each year while filing — just inform your employer so TDS is deducted correctly.</p>
+      </details>
+      <details>
+        <summary>What is marginal relief in the new regime?</summary>
+        <p>If your taxable income is just above ₹12 lakh, the extra tax can't exceed the amount by which you cross ₹12 lakh. Earning a little more never leaves you worse off — the relief phases out naturally as income rises.</p>
+      </details>
+      <details>
+        <summary>Do I submit investment proofs under the new regime?</summary>
+        <p>No — there are almost no deductions to claim, so no proofs needed. Under the old regime, every deduction you claim needs documentary proof submitted to your employer.</p>
+      </details>
+    </div>
+
+    <h2>Keep exploring</h2>
+    <div class="grid">
+      <div class="card"><div class="icon">🏠</div><h3>EMI Calculator</h3><p>Home loan eating your salary? See its true cost before you sign.</p><a href="emi.html">Calculate →</a></div>
+      <div class="card"><div class="icon">📈</div><h3>SIP Calculator</h3><p>What your monthly SIP becomes — with assumptions printed, not hidden.</p><a href="sip.html">Calculate →</a></div>
+      <div class="card"><div class="icon">📖</div><h3>New vs old regime, explained</h3><p>The full guide: who wins at which salary, with worked examples.</p><a href="../guides/new-vs-old-regime-fy2026-27.html">Read the guide →</a></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>PaisaSahi</h4>
+        <p>India's honest money guide.<br>पैसा सही — money, done right.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="emi.html">Calculators</a>
+        <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+        <a href="../our-promise.html">Our Promise</a>
+      </div>
+      <div>
+        <h4>Fine print</h4>
+        <a href="../how-we-make-money.html">How we make money</a>
+        <a href="../methodology.html">Ranking methodology</a>
+      </div>
+    </div>
+    <div class="fine">
+      PaisaSahi is an education website, not a SEBI-registered investment adviser or a bank. Content is for information only — not financial advice. Tax rules change; verify your liability on incometax.gov.in or with a chartered accountant. We may earn affiliate commissions; this never affects rankings.
+    </div>
+  </div>
+</footer>
+
+<script>
+  const fmt = n => '₹' + Math.round(n).toLocaleString('en-IN');
+  const NEW_BANDS = [[400000,0],[800000,.05],[1200000,.10],[1600000,.15],[2000000,.20],[2400000,.25],[Infinity,.30]];
+  const OLD_BANDS = [[250000,0],[500000,.05],[1000000,.20],[Infinity,.30]];
+
+  function slabTax(t, bands){
+    let tax = 0, prev = 0;
+    for (const [lim, rate] of bands){
+      if (t > prev){ tax += (Math.min(t, lim) - prev) * rate; prev = lim; }
+      else break;
+    }
+    return tax;
+  }
+  function newRegime(gross){
+    const taxable = Math.max(0, gross - 75000);
+    let tax = slabTax(taxable, NEW_BANDS);
+    if (taxable <= 1200000) tax = 0;                    // 87A rebate
+    else tax = Math.min(tax, taxable - 1200000);        // marginal relief (simplified)
+    const cess = tax * 0.04;
+    return { total: tax + cess };
+  }
+  function oldRegime(gross, c80, d80, hra){
+    const c = Math.min(Math.max(0, c80 || 0), 150000);
+    const taxable = Math.max(0, gross - 50000 - c - Math.max(0, d80 || 0) - Math.max(0, hra || 0));
+    let tax = slabTax(taxable, OLD_BANDS);
+    if (taxable <= 500000) tax = Math.max(0, tax - 12500); // 87A rebate
+    const cess = tax * 0.04;
+    return { total: tax + cess };
+  }
+  const rGross = document.getElementById('r-gross'),
+        n80c = document.getElementById('n-80c'),
+        n80d = document.getElementById('n-80d'),
+        nHra = document.getElementById('n-hra');
+  function calc(){
+    const gross = +rGross.value;
+    const tNew = newRegime(gross).total;
+    const tOld = oldRegime(gross, +n80c.value, +n80d.value, +nHra.value).total;
+    document.getElementById('o-gross').textContent = fmt(gross);
+    document.getElementById('new-out').textContent = fmt(tNew);
+    document.getElementById('old-out').textContent = fmt(tOld);
+    const diff = Math.abs(tNew - tOld);
+    const v = document.getElementById('verdict-out');
+    if (diff < 1){ v.textContent = 'It\'s a tie'; }
+    else if (tNew < tOld){ v.textContent = 'New regime wins'; }
+    else { v.textContent = 'Old regime wins'; }
+    document.getElementById('diff-out').textContent = fmt(diff);
+  }
+  [rGross, n80c, n80d, nHra].forEach(el => el.addEventListener('input', calc));
+  calc();
+</script>
+</body>
+</html>

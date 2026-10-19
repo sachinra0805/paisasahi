@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credit Card Value Checker — Is Your Card Worth Its Annual Fee? | PaisaSahi</title>
+<meta name="description" content="A credit card is worth its annual fee only if your rewards beat the fee. Enter your spending and your own reward-rate assumptions — this checker does the net-value math. No sign-up, no spam.">
+<link rel="stylesheet" href="../assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I figure out a credit card's real reward rate?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Take the issuer's rewards chart and convert points to rupees using how you would actually redeem them. If 1 point equals 0.25 rupees as statement credit, then a 5X earn rate is really 1.25 percent back. Ignore the marketing multiplier and do this division yourself."}
+    },
+    {
+      "@type": "Question",
+      "name": "When does an annual-fee credit card make sense?",
+      "acceptedAnswer": {"@type": "Answer", "text": "When the net value stays positive year after year on your normal spending, or when perks you would pay for anyway, like lounge access or subscriptions, exceed the fee. One-time welcome bonuses should not decide it, because they do not repeat."}
+    },
+    {
+      "@type": "Question",
+      "name": "What about fee waivers on spend milestones?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Treat the fee as zero only if you would hit the waiver threshold with spending you would do anyway. If the waiver needs 3 lakh of annual spending and you spend 2 lakh, you are paying the fee."}
+    },
+    {
+      "@type": "Question",
+      "name": "Do milestone benefits count in the value calculation?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Only if you would use them without changing your behavior. A voucher worth 5,000 rupees that you would never have bought is worth zero rupees to you."}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="ribbon">No spam calls · No bought rankings · <b>Free forever</b></div>
+
+<header class="site">
+  <div class="nav">
+    <a class="logo" href="../index.html">Paisa<span>Sahi</span></a>
+    <div class="nav-links">
+      <a href="../calculators/emi.html">Calculators</a>
+      <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+      <a href="../guides/new-vs-old-regime-fy2026-27.html">Guides</a>
+      <a href="../our-promise.html">Our Promise</a>
+      <a class="btn" href="#newsletter">Get the letter</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="wrap-narrow">
+
+  <div class="page-head">
+    <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="../calculators/emi.html">Calculators</a> › Card value</div>
+    <div class="kicker">Calculator</div>
+    <h1>Is your credit card actually worth its annual fee?</h1>
+    <p class="lede">A card charging ₹3,000 a year needs to return more than ₹3,000 in rewards. This checker runs that math on your real spending — using reward rates <em>you</em> set, not the bank's marketing.</p>
+    <div class="answer-box">
+      <strong>The one-line answer:</strong> a credit card earns its fee only when <strong>(your spending × your reward rate, summed across categories) − annual fee</strong> comes out positive. Enter your numbers below — the verdict updates live.
+    </div>
+    <p class="updated">Updated: October 2026</p>
+  </div>
+
+  <div class="calc">
+    <h2>The value checker</h2>
+    <p class="hint">Step 1 — your average monthly spending per category. Step 2 — the reward rate you assume for each category (as % value back per rupee). Be honest; check the issuer's rewards chart.</p>
+
+    <h3 style="color:var(--green-dark); margin:18px 0 10px; font-size:18px;">Your monthly spending</h3>
+    <div class="field"><label>Fuel <output id="o-sfuel">₹8,000</output></label>
+      <input type="range" id="s-fuel" min="0" max="50000" step="500" value="8000"></div>
+    <div class="field"><label>Dining <output id="o-sdining">₹6,000</output></label>
+      <input type="range" id="s-dining" min="0" max="50000" step="500" value="6000"></div>
+    <div class="field"><label>Travel <output id="o-stravel">₹5,000</output></label>
+      <input type="range" id="s-travel" min="0" max="100000" step="500" value="5000"></div>
+    <div class="field"><label>Groceries <output id="o-sgroc">₹10,000</output></label>
+      <input type="range" id="s-groc" min="0" max="50000" step="500" value="10000"></div>
+    <div class="field"><label>Everything else <output id="o-sother">₹15,000</output></label>
+      <input type="range" id="s-other" min="0" max="100000" step="1000" value="15000"></div>
+    <div class="field"><label>Annual fee <output id="o-fee">₹3,000</output></label>
+      <input type="range" id="s-fee" min="0" max="20000" step="250" value="3000"></div>
+
+    <h3 style="color:var(--green-dark); margin:22px 0 10px; font-size:18px;">Reward rates you assume <span style="font-weight:400; font-size:14px; color:var(--muted);">(your assumptions — not facts about any card)</span></h3>
+    <div class="field"><label>Fuel <output id="o-rfuel">2.0%</output></label>
+      <input type="range" id="r-fuel" min="0" max="10" step="0.25" value="2"></div>
+    <div class="field"><label>Dining <output id="o-rdining">3.0%</output></label>
+      <input type="range" id="r-dining" min="0" max="10" step="0.25" value="3"></div>
+    <div class="field"><label>Travel <output id="o-rtravel">4.0%</output></label>
+      <input type="range" id="r-travel" min="0" max="10" step="0.25" value="4"></div>
+    <div class="field"><label>Groceries <output id="o-rgroc">2.0%</output></label>
+      <input type="range" id="r-groc" min="0" max="10" step="0.25" value="2"></div>
+    <div class="field"><label>Everything else <output id="o-rother">1.0%</output></label>
+      <input type="range" id="r-other" min="0" max="10" step="0.25" value="1"></div>
+
+    <div class="result">
+      <div class="lbl">Net annual value (rewards − fee)</div>
+      <div class="big" id="net-out">₹0</div>
+      <div class="result-grid">
+        <div><span>Est. annual rewards</span><b id="rew-out">₹0</b></div>
+        <div><span>Annual fee</span><b id="fee-out">₹0</b></div>
+        <div><span>Verdict</span><b id="verdict-out">—</b></div>
+      </div>
+      <p id="breakeven-out" style="margin-top:14px; font-size:14px; color:#cfe3d8;"></p>
+    </div>
+    <p class="micro" style="margin-top:12px;">This counts rewards vs fee only — not interest. Never carry a balance to chase rewards: a month of interest wipes out a year of points.</p>
+  </div>
+
+  <div class="formula">
+    <strong>The formula:</strong><br>
+    <code>Net value = Σ (monthly spend × 12 × reward rate) − annual fee</code>, summed across the five categories.<br>
+    Reward rate = effective % value back per rupee <em>as you would redeem it</em> — e.g. if 1 point = ₹0.25 in statement credit, a "4 points per ₹100" earn is a 1% rate.
+  </div>
+
+  <div class="illustrative">
+    <b>Illustrative example — check the issuer's current terms.</b><br>
+    Meera spends ₹10,000/month on groceries and assumes a 2% reward rate: ₹10,000 × 12 × 2% = ₹2,400/year in rewards. On a card with a ₹1,500 annual fee, her net value is ₹900 — the card pays for itself. Drop her assumed rate to 1% and the net falls to −₹300: it doesn't.
+  </div>
+
+  <div class="assume">
+    <strong>Assumptions &amp; limits:</strong> reward rates are your inputs, not facts about any real card — verify against the issuer's current rewards chart. Point values depend on how you redeem; welcome bonuses, milestone perks, and lounge access are excluded. We may earn a commission if you're approved via our links — it never changes our rankings.
+  </div>
+
+  <div class="article">
+    <h2>How do I figure out a card's real reward rate?</h2>
+    <p>Take the issuer's rewards chart and convert points to rupees using <em>your</em> redemption. Statement credit is the honest baseline: if 1 point = ₹0.25 there, a "5X points" earn is 1.25% back. Airline miles can be worth more — or far less — depending on the redemption. When in doubt, use the statement-credit value; it's the floor nobody can argue with.</p>
+
+    <h2>When does an annual-fee card make sense?</h2>
+    <p>When the net value stays positive year after year on spending you'd do anyway — or when perks you'd genuinely pay for (lounge visits you actually take, subscriptions you'd actually buy) exceed the fee on their own. Run this checker with the fee set to zero versus the real fee: if the card only wins because of a first-year welcome bonus, it's a one-year card, not a keeper.</p>
+
+    <h2>What about fee waivers on spend milestones?</h2>
+    <p>Treat the fee as zero only if you'd cross the waiver threshold with normal spending. A ₹5,000 fee waived at ₹4 lakh annual spend is free for someone spending ₹5 lakh — and a ₹5,000 fee for someone spending ₹2.5 lakh. Don't inflate your spending to chase a waiver; that's the bank's game, not yours.</p>
+  </div>
+
+  <div class="faq">
+    <h2 style="font-family:Georgia,serif; color:var(--green-dark); margin-bottom:14px;">Questions, answered</h2>
+    <details><summary>How do I figure out a card's real reward rate?</summary><p>Take the issuer's rewards chart and convert points to rupees using how you would actually redeem them. If 1 point equals ₹0.25 as statement credit, a "5X points" earn is really 1.25% back. Ignore the marketing multiplier and do this division yourself.</p></details>
+    <details><summary>When does an annual-fee credit card make sense?</summary><p>When the net value stays positive year after year on your normal spending, or when perks you would pay for anyway exceed the fee. One-time welcome bonuses should not decide it, because they do not repeat.</p></details>
+    <details><summary>What about fee waivers on spend milestones?</summary><p>Treat the fee as zero only if you would hit the waiver threshold with spending you would do anyway. If the waiver needs ₹3 lakh of annual spending and you spend ₹2 lakh, you are paying the fee.</p></details>
+    <details><summary>Do milestone benefits count in the value calculation?</summary><p>Only if you would use them without changing your behavior. A voucher worth ₹5,000 that you would never have bought is worth ₹0 to you.</p></details>
+  </div>
+
+  <div class="article">
+    <h2>Authoritative sources</h2>
+    <ul>
+      <li><a href="https://www.rbi.org.in">RBI</a> — master directions on credit card and debit card issuance (what issuers must disclose).</li>
+      <li><a href="https://www.npci.org.in">NPCI</a> — how RuPay credit cards work on UPI.</li>
+    </ul>
+    <h2>Keep going</h2>
+    <ul>
+      <li><a href="emi.html">EMI calculator</a> — the true cost of borrowing, before you put it on a card.</li>
+      <li><a href="cibil-planner.html">CIBIL 90-day action planner</a> — better score, better card approvals.</li>
+      <li><a href="../guides/best-credit-cards-2026.html">Best credit cards in India 2026</a> — ranked by math, not payouts.</li>
+    </ul>
+  </div>
+
+  <section id="newsletter">
+    <div class="news">
+      <h2>The Sahi Letter</h2>
+      <p>One money truth every Sunday. Read in 3 minutes. No spam — obviously.</p>
+      <form id="nl-form">
+        <input type="email" placeholder="you@example.com" required>
+        <button class="btn" type="submit">Join free</button>
+      </form>
+      <div class="micro" id="nl-thanks" style="display:none; font-weight:700; color:var(--green);">You're in. First letter lands Sunday. 📬</div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>PaisaSahi</h4>
+        <p>India's honest money guide.<br>पैसा सही — money, done right.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="emi.html">Calculators</a>
+        <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+        <a href="../guides/new-vs-old-regime-fy2026-27.html">Guides</a>
+        <a href="../our-promise.html">Our Promise</a>
+      </div>
+      <div>
+        <h4>Fine print</h4>
+        <a href="../how-we-make-money.html">How we make money</a>
+        <a href="../methodology.html">Ranking methodology</a>
+        <a href="../our-promise.html">Privacy: we don't sell data</a>
+      </div>
+    </div>
+    <div class="fine">
+      PaisaSahi is an education website, not a SEBI-registered investment adviser or a bank. Content is for information only — not financial advice. We may earn affiliate commissions; this never affects rankings.
+    </div>
+  </div>
+</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const fmt = n => '₹' + Math.round(n).toLocaleString('en-IN');
+function calc(){
+  const cats = [
+    {s:+$('s-fuel').value,   r:+$('r-fuel').value,   so:'o-sfuel',   ro:'o-rfuel'},
+    {s:+$('s-dining').value, r:+$('r-dining').value, so:'o-sdining', ro:'o-rdining'},
+    {s:+$('s-travel').value, r:+$('r-travel').value, so:'o-stravel', ro:'o-rtravel'},
+    {s:+$('s-groc').value,   r:+$('r-groc').value,   so:'o-sgroc',   ro:'o-rgroc'},
+    {s:+$('s-other').value,  r:+$('r-other').value,  so:'o-sother',  ro:'o-rother'}
+  ];
+  cats.forEach(c => {
+    $(c.so).textContent = fmt(c.s);
+    $(c.ro).textContent = c.r.toFixed(2).replace(/\.?0+$/,'') + '%';
+  });
+  const fee = +$('s-fee').value;
+  $('o-fee').textContent = fmt(fee);
+  const rewards = cats.reduce((t,c) => t + c.s*12*(c.r/100), 0);
+  const net = rewards - fee;
+  $('rew-out').textContent = fmt(rewards);
+  $('fee-out').textContent = fmt(fee);
+  const big = $('net-out');
+  big.textContent = (net < 0 ? '−₹' : '₹') + Math.round(Math.abs(net)).toLocaleString('en-IN');
+  big.style.color = net >= 0 ? '#8fe3b8' : '#ff9d8a';
+  $('verdict-out').textContent = net >= 0 ? '✓ Pays for itself' : '✗ Doesn\'t earn its fee';
+  const be = $('breakeven-out');
+  const rOther = cats[4].r;
+  if (net < 0 && rOther > 0) {
+    const extraMonthly = (-net) / (rOther/100) / 12;
+    be.textContent = 'To break even at your assumed rates, you\'d need roughly ' + fmt(extraMonthly) + '/month more spend in "everything else".';
+  } else if (net < 0) {
+    be.textContent = 'No breakeven possible at a 0% assumed rate on extra spending — the fee wins.';
+  } else {
+    be.textContent = '';
+  }
+}
+document.querySelectorAll('input[type=range]').forEach(el => el.addEventListener('input', calc));
+calc();
+$('nl-form').addEventListener('submit', e => {
+  e.preventDefault();
+  $('nl-form').style.display = 'none';
+  $('nl-thanks').style.display = 'block';
+});
+</script>
+</body>
+</html>
