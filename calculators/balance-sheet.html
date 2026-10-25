@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Balance Sheet — Net Worth Calculator | PaisaSahi</title>
+<meta name="description" content="See your whole money picture in one place: everything you own minus everything you owe. Free net-worth balance sheet — runs in your browser, nothing is sent or saved.">
+<link rel="stylesheet" href="../assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is net worth?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Net worth is everything you own (assets) minus everything you owe (liabilities). It is the single number that tells you whether your money is moving forward over time, regardless of what your salary is."}
+    },
+    {
+      "@type": "Question",
+      "name": "Should I count my home as an asset if I have a home loan?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes — count the home at its realistic resale value as an asset, and the outstanding loan as a liability. The difference between the two is your equity in the home. Counting only one side of the pair gives a meaningless number."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is my PF / EPF balance an asset?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Your EPF balance is money you own, even if you cannot withdraw it freely today. Include the current balance from your EPF passbook. The same applies to NPS and other locked-in retirement accounts."}
+    },
+    {
+      "@type": "Question",
+      "name": "How often should I update my balance sheet?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Twice a year is enough for most families. Net worth is a slow-moving scoreboard, not a daily ticker. Update it when something big changes — a loan closes, a property is bought or sold, or at a fixed date like the start of a financial year."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is my data sent anywhere when I use this page?",
+      "acceptedAnswer": {"@type": "Answer", "text": "No. This calculator runs entirely in your browser. Nothing you type is sent to a server, stored, or tracked. Close the tab and the numbers are gone."}
+    }
+  ]
+}
+</script>
+<style>
+  .slider-row{display:flex; gap:12px; align-items:center;}
+  .slider-row input[type=range]{flex:1;}
+  .slider-row input[type=number]{width:140px; padding:10px 12px; border:1.5px solid var(--line); border-radius:12px; font-size:15px; background:#fff;}
+  .slider-row input[type=number]:focus{outline:none; border-color:var(--green-bright); box-shadow:0 0 0 4px rgba(16,165,110,.15);}
+  @media(max-width:560px){ .slider-row{flex-wrap:wrap;} .slider-row input[type=number]{width:100%;} }
+  .bs-group{font-family:'Fraunces',Georgia,serif; font-size:21px; color:var(--green-dark); margin:24px 0 14px;}
+  .bs-group:first-of-type{margin-top:6px;}
+  .ownbar{display:flex; height:34px; border-radius:999px; overflow:hidden; border:1px solid var(--line); margin:14px 0 8px;}
+  .ownbar .own{background:var(--grad); transition:width .3s;}
+  .ownbar .owe{background:repeating-linear-gradient(45deg,#b3402e,#b3402e 8px,#c2513f 8px,#c2513f 16px); transition:width .3s;}
+  .ownbar-labels{display:flex; justify-content:space-between; font-size:13.5px; color:var(--muted); flex-wrap:wrap; gap:6px;}
+  .ownbar-labels b{color:var(--ink);}
+</style>
+</head>
+<body>
+
+<div class="ribbon">No spam calls &nbsp;·&nbsp; No bought rankings &nbsp;·&nbsp; <b>Free forever</b></div>
+
+<header class="site">
+  <div class="nav">
+    <a class="logo" href="../index.html">Paisa<span>Sahi</span></a>
+    <div class="nav-links">
+      <a href="emi.html">Calculators</a>
+      <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+      <a href="#">Guides</a>
+      <a href="../our-promise.html">Our Promise</a>
+      <a class="btn" href="#">Get the letter</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="emi.html">Calculators</a> › My Balance Sheet</div>
+
+  <div class="page-head">
+    <div class="kicker">New view</div>
+    <h1>My Balance Sheet</h1>
+    <p class="lede">Every calculator on the internet does one sum at a time. This one does the only sum that matters: everything you own, minus everything you owe.</p>
+    <div class="updated">Updated: October 2026</div>
+  </div>
+
+  <div class="answer-box">
+    <strong>The one-line answer:</strong> your <strong>net worth = total assets − total liabilities</strong>. One number, honestly counted, tells you more about your money than your salary ever will.
+  </div>
+
+  <div class="calc">
+    <h2>Build your balance sheet</h2>
+    <p class="hint">Drag the sliders or type exact figures. Everything updates live.</p>
+
+    <div class="illustrative" style="margin-top:0;">
+      <b>Meet the Sharmas — an example family.</b> The numbers below are pre-filled with an illustrative example (a Bengaluru couple, one home, one home loan). Change any number to make it yours. The Sharmas are not real people, and none of this is data about anyone.
+    </div>
+
+    <h3 class="bs-group">What you own — assets</h3>
+    <div class="field">
+      <label>Home / property (resale value) <output id="o-a-home">₹85,00,000</output></label>
+      <div class="slider-row"><input type="range" id="r-a-home" min="0" max="50000000" step="100000" value="8500000" aria-label="Home or property value"><input type="number" id="n-a-home" min="0" value="8500000" aria-label="Home or property value in rupees"></div>
+    </div>
+    <div class="field">
+      <label>Gold &amp; jewellery <output id="o-a-gold">₹12,00,000</output></label>
+      <div class="slider-row"><input type="range" id="r-a-gold" min="0" max="10000000" step="10000" value="1200000" aria-label="Gold and jewellery value"><input type="number" id="n-a-gold" min="0" value="1200000" aria-label="Gold and jewellery value in rupees"></div>
+    </div>
+    <div class="field">
+      <label>PF / EPF balance <output id="o-a-pf">₹18,00,000</output></label>
+      <div class="slider-row"><input type="range" id="r-a-pf" min="0" max="20000000" step="10000" value="1800000" aria-label="PF or EPF balance"><input type="number" id="n-a-pf" min="0" value="1800000" aria-label="PF or EPF balance in rupees"></div>
+    </div>
+    <div class="field">
+      <label>Savings &amp; FDs <output id="o-a-save">₹6,50,000</output></label>
+      <div class="slider-row"><input type="range" id="r-a-save" min="0" max="20000000" step="10000" value="650000" aria-label="Savings and fixed deposits"><input type="number" id="n-a-save" min="0" value="650000" aria-label="Savings and fixed deposits in rupees"></div>
+    </div>
+    <div class="field">
+      <label>Investments (mutual funds, shares) <output id="o-a-inv">₹9,00,000</output></label>
+      <div class="slider-row"><input type="range" id="r-a-inv" min="0" max="20000000" step="10000" value="900000" aria-label="Investments"><input type="number" id="n-a-inv" min="0" value="900000" aria-label="Investments in rupees"></div>
+    </div>
+    <div class="field">
+      <label>Other assets <output id="o-a-other">₹1,50,000</output></label>
+      <div class="slider-row"><input type="range" id="r-a-other" min="0" max="10000000" step="10000" value="150000" aria-label="Other assets"><input type="number" id="n-a-other" min="0" value="150000" aria-label="Other assets in rupees"></div>
+    </div>
+
+    <h3 class="bs-group">What you owe — liabilities</h3>
+    <div class="field">
+      <label>Home loan outstanding <output id="o-d-home">₹52,00,000</output></label>
+      <div class="slider-row"><input type="range" id="r-d-home" min="0" max="50000000" step="100000" value="5200000" aria-label="Home loan outstanding"><input type="number" id="n-d-home" min="0" value="5200000" aria-label="Home loan outstanding in rupees"></div>
+    </div>
+    <div class="field">
+      <label>Other loans (car, personal, education) <output id="o-d-loan">₹3,50,000</output></label>
+      <div class="slider-row"><input type="range" id="r-d-loan" min="0" max="10000000" step="5000" value="350000" aria-label="Other loans"><input type="number" id="n-d-loan" min="0" value="350000" aria-label="Other loans in rupees"></div>
+    </div>
+    <div class="field">
+      <label>Credit card dues <output id="o-d-card">₹85,000</output></label>
+      <div class="slider-row"><input type="range" id="r-d-card" min="0" max="1000000" step="1000" value="85000" aria-label="Credit card dues"><input type="number" id="n-d-card" min="0" value="85000" aria-label="Credit card dues in rupees"></div>
+    </div>
+    <div class="field">
+      <label>Other dues (borrowed from family, etc.) <output id="o-d-other">₹40,000</output></label>
+      <div class="slider-row"><input type="range" id="r-d-other" min="0" max="5000000" step="5000" value="40000" aria-label="Other dues"><input type="number" id="n-d-other" min="0" value="40000" aria-label="Other dues in rupees"></div>
+    </div>
+
+    <div class="result">
+      <div class="lbl">Your net worth</div>
+      <div class="big" id="nw-out">₹75,25,000</div>
+      <div class="result-grid">
+        <div><span>Total assets</span><b id="ta-out">₹1,32,00,000</b></div>
+        <div><span>Total liabilities</span><b id="tl-out">₹56,75,000</b></div>
+        <div><span>Debt-to-assets</span><b id="dta-out">43.0%</b></div>
+      </div>
+    </div>
+
+    <div class="ownbar" aria-hidden="true"><div class="own" id="bar-own" style="width:57%"></div><div class="owe" id="bar-owe" style="width:43%"></div></div>
+    <div class="ownbar-labels">
+      <span><b id="own-pct">57%</b> of what you own is really yours</span>
+      <span><b id="owe-pct">43%</b> is claimed by lenders</span>
+    </div>
+    <p id="nw-note" style="margin-top:12px; font-size:15px;"></p>
+  </div>
+
+  <div class="formula">
+    <strong>The formula we use:</strong><br>
+    <code>Net worth = Σ assets − Σ liabilities</code> &nbsp;·&nbsp; <code>Debt-to-assets = liabilities ÷ assets × 100</code><br>
+    Use resale values for things, outstanding balances for loans — both as of today, not what you paid or borrowed originally.
+  </div>
+
+  <div class="assume">
+    <strong>Your numbers stay yours:</strong> this page runs entirely in your browser — nothing you type is sent or saved anywhere. Close the tab and it's gone. Value gold and property at what they would realistically sell for, not the sentimental or asking price.
+  </div>
+
+  <div class="article">
+    <h2>Why one number beats ten calculators</h2>
+    <p>A salary tells you what flows in. An EMI tells you what flows out. Neither tells you whether you're actually getting anywhere. Net worth does: if it's rising year after year, your money system works — whatever your income. If it's flat while income rises, something is leaking, and the balance sheet shows you where.</p>
+
+    <h2>How to read the own-vs-owe bar</h2>
+    <p>The bar splits everything you own into the part that's truly yours and the part lenders have a claim on. A young family with a fresh home loan might be at 20% own / 80% owe — normal. What matters is the direction: every EMI paid, every debt cleared, every rupee invested moves the green boundary right. Under 30% debt-to-assets is comfortable for most families; above 60% deserves a plan — start with the <a href="avalanche.html">Debt Avalanche</a> view.</p>
+
+    <div class="faq">
+      <h2>Common questions</h2>
+      <details>
+        <summary>What is net worth?</summary>
+        <p>Everything you own minus everything you owe. It's the single scoreboard number for your money — income is just one of the flows that changes it.</p>
+      </details>
+      <details>
+        <summary>Should I count my home if I have a home loan?</summary>
+        <p>Yes — count the home at realistic resale value as an asset and the outstanding loan as a liability. The gap between them is your equity. Counting only one side distorts the picture.</p>
+      </details>
+      <details>
+        <summary>Is my PF / EPF an asset?</summary>
+        <p>Yes. It's your money, even if withdrawal is restricted. Use the current passbook balance. Same for NPS and other retirement accounts.</p>
+      </details>
+      <details>
+        <summary>How often should I redo this?</summary>
+        <p>Twice a year is plenty. Net worth moves slowly; checking it monthly mostly measures market noise, not progress.</p>
+      </details>
+      <details>
+        <summary>Is my data sent anywhere?</summary>
+        <p>No. The calculation happens in your browser. Nothing is transmitted, stored, or tracked — that's rather the point of this site.</p>
+      </details>
+    </div>
+
+    <h2>Keep exploring</h2>
+    <div class="grid">
+      <div class="card"><div class="icon">🏔️</div><h3>Debt Avalanche Clearance</h3><p>Got the balance sheet? Now clear the red side in the order that saves the most interest.</p><a href="avalanche.html">Plan the payoff →</a></div>
+      <div class="card"><div class="icon">🏠</div><h3>EMI Calculator</h3><p>The true cost of any single loan, before you sign for it.</p><a href="emi.html">Calculate →</a></div>
+      <div class="card"><div class="icon">🚨</div><h3>Emergency Fund</h3><p>Before attacking debt, size the cushion that keeps a bad month off your credit card.</p><a href="emergency-fund.html">Size it →</a></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>PaisaSahi</h4>
+        <p>India's honest money guide.<br>पैसा सही — money, done right.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="emi.html">Calculators</a>
+        <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+        <a href="../our-promise.html">Our Promise</a>
+      </div>
+      <div>
+        <h4>Fine print</h4>
+        <a href="../how-we-make-money.html">How we make money</a>
+        <a href="../methodology.html">Ranking methodology</a>
+      </div>
+    </div>
+    <div class="fine">
+      PaisaSahi is an education website, not a SEBI-registered investment adviser or a bank. Content is for information only — not financial advice. We may earn affiliate commissions; this never affects rankings.
+    </div>
+  </div>
+</footer>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const fmt = n => '₹' + Math.round(n).toLocaleString('en-IN');
+  const fmtSigned = n => (n < 0 ? '−₹' : '₹') + Math.round(Math.abs(n)).toLocaleString('en-IN');
+
+  function pair(rId, nId, oId){
+    const r = $(rId), n = $(nId);
+    r.addEventListener('input', () => { n.value = r.value; calc(); });
+    n.addEventListener('input', () => {
+      const v = parseFloat(n.value);
+      if (!isNaN(v)) r.value = Math.max(+r.min, Math.min(+r.max, v));
+      calc();
+    });
+  }
+  function val(nId){ const v = parseFloat($(nId).value); return isNaN(v) || v < 0 ? 0 : v; }
+  function setOut(oId, nId){ $(oId).textContent = fmt(val(nId)); }
+
+  const ASSETS = [['r-a-home','n-a-home','o-a-home'],['r-a-gold','n-a-gold','o-a-gold'],['r-a-pf','n-a-pf','o-a-pf'],['r-a-save','n-a-save','o-a-save'],['r-a-inv','n-a-inv','o-a-inv'],['r-a-other','n-a-other','o-a-other']];
+  const DEBTS  = [['r-d-home','n-d-home','o-d-home'],['r-d-loan','n-d-loan','o-d-loan'],['r-d-card','n-d-card','o-d-card'],['r-d-other','n-d-other','o-d-other']];
+  ASSETS.concat(DEBTS).forEach(([r,n,o]) => pair(r,n,o));
+
+  function calc(){
+    ASSETS.concat(DEBTS).forEach(([,n,o]) => setOut(o,n));
+    const assets = ASSETS.reduce((t,[,n]) => t + val(n), 0);
+    const debts  = DEBTS.reduce((t,[,n]) => t + val(n), 0);
+    const nw = assets - debts;
+    $('nw-out').textContent = fmtSigned(nw);
+    $('ta-out').textContent = fmt(assets);
+    $('tl-out').textContent = fmt(debts);
+    const dta = assets > 0 ? debts / assets * 100 : (debts > 0 ? 100 : 0);
+    $('dta-out').textContent = dta.toFixed(1) + '%';
+    const ownPct = assets > 0 ? Math.max(0, nw / assets * 100) : 0;
+    const owePct = assets > 0 ? Math.min(100, debts / assets * 100) : (debts > 0 ? 100 : 0);
+    $('bar-own').style.width = ownPct + '%';
+    $('bar-owe').style.width = owePct + '%';
+    $('own-pct').textContent = Math.round(ownPct) + '%';
+    $('owe-pct').textContent = Math.round(owePct) + '%';
+    const note = $('nw-note');
+    if (assets === 0 && debts === 0) note.textContent = 'Add your numbers above — assets on top, debts below.';
+    else if (nw < 0) note.textContent = 'Your debts are bigger than your assets right now. That is a starting point, not a verdict — the fastest lever is clearing the highest-rate debt first.';
+    else if (dta <= 30) note.textContent = 'A comfortable position: lenders claim under a third of what you own. Keeping the bar moving right is mostly about steady investing now.';
+    else if (dta <= 60) note.textContent = 'A typical mid-loan position. Every prepayment and every cleared loan visibly moves this bar.';
+    else note.textContent = 'Lenders claim over 60% of what you own. Worth making a payoff plan — the Avalanche view below is built for exactly this.';
+  }
+  calc();
+</script>
+</body>
+</html>

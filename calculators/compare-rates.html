@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compare Loan Rates — What 1% Really Costs | PaisaSahi</title>
+<meta name="description" content="Put three loan interest rates side by side on the same amount and tenure. See each EMI, total interest, and the real rupee gap between the cheapest and costliest offer.">
+<link rel="stylesheet" href="../assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does a 1% interest rate difference actually matter?",
+      "acceptedAnswer": {"@type": "Answer", "text": "On a ₹50 lakh loan over 20 years, 1% is roughly ₹310 per lakh of loan in monthly EMI terms — in total it adds up to about ₹7–8 lakh of extra interest across the tenure. The longer the tenure and the bigger the loan, the more a 'small' rate difference is worth."}
+    },
+    {
+      "@type": "Question",
+      "name": "Should I compare loans by EMI or by total interest?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Both, but total interest is the honest cost of the loan. A lower EMI achieved by stretching the tenure can hide a much higher total interest. When comparing offers for the same amount and tenure — as this page does — the EMI and total interest always rank the offers in the same order."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is a lower rate always worth switching lenders for?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Only if the interest you save beats the switching costs — processing fees, valuation and legal charges, and any prepayment penalty on the old loan. Run the old and new rates through this comparison over your remaining tenure, then subtract the switching costs from the interest gap."}
+    },
+    {
+      "@type": "Question",
+      "name": "Fixed or floating — which lane should I pick?",
+      "acceptedAnswer": {"@type": "Answer", "text": "This comparison holds each rate fixed to show the arithmetic. A floating rate that starts 1% lower can end higher if rates rise. Compare like with like: today's fixed rate against today's floating rate tells you the starting gap, not the future."}
+    }
+  ]
+}
+</script>
+<style>
+  .slider-row{display:flex; gap:12px; align-items:center;}
+  .slider-row input[type=range]{flex:1;}
+  .slider-row input[type=number]{width:140px; padding:10px 12px; border:1.5px solid var(--line); border-radius:12px; font-size:15px; background:#fff;}
+  .slider-row input[type=number]:focus{outline:none; border-color:var(--green-bright); box-shadow:0 0 0 4px rgba(16,165,110,.15);}
+  @media(max-width:560px){ .slider-row{flex-wrap:wrap;} .slider-row input[type=number]{width:100%;} }
+  .lanes{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; margin-top:8px;}
+  .lane{position:relative; background:#fff; border:1.5px solid var(--line); border-radius:18px; padding:22px;}
+  .lane.best{border-color:var(--green); box-shadow:0 0 0 4px rgba(16,165,110,.12);}
+  .lane .tag{position:absolute; top:-11px; right:16px; background:var(--grad); color:#fff; font-size:11.5px;
+    font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:3px 12px; border-radius:999px; display:none;}
+  .lane.best .tag{display:block;}
+  .lane h3{font-family:'Fraunces',Georgia,serif; font-size:19px; color:var(--green-ink); margin-bottom:12px;}
+  .lane .field{margin-bottom:14px;}
+  .lane .emi-big{font-family:'Fraunces',Georgia,serif; font-size:32px; font-weight:800; color:var(--green-dark); line-height:1.1;}
+  .lane .emi-lbl{font-size:11.5px; letter-spacing:1.6px; text-transform:uppercase; color:var(--muted); margin-top:14px;}
+  .lane dl{margin-top:6px; font-size:14.5px;}
+  .lane dl div{display:flex; justify-content:space-between; padding:7px 0; border-top:1px solid var(--line);}
+  .lane dl span{color:var(--muted);}
+  .lane dl b{color:var(--ink);}
+</style>
+</head>
+<body>
+
+<div class="ribbon">No spam calls &nbsp;·&nbsp; No bought rankings &nbsp;·&nbsp; <b>Free forever</b></div>
+
+<header class="site">
+  <div class="nav">
+    <a class="logo" href="../index.html">Paisa<span>Sahi</span></a>
+    <div class="nav-links">
+      <a href="emi.html">Calculators</a>
+      <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+      <a href="#">Guides</a>
+      <a href="../our-promise.html">Our Promise</a>
+      <a class="btn" href="#">Get the letter</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="emi.html">Calculators</a> › Compare Loan Rates</div>
+
+  <div class="page-head">
+    <div class="kicker">New view</div>
+    <h1>Compare Loan Rates</h1>
+    <p class="lede">One rate slider hides the story. Put the bank's offer, the NBFC's offer, and the "special deal" side by side — same loan, same tenure — and see what the gap is actually worth in rupees.</p>
+    <div class="updated">Updated: October 2026</div>
+  </div>
+
+  <div class="answer-box">
+    <strong>The one-line answer:</strong> on long loans, <strong>the rate is the price</strong>. A 1% gap on a ₹50 lakh, 20-year loan is worth roughly <strong>₹7–8 lakh</strong> of interest — dwarfing any processing-fee difference.
+  </div>
+
+  <div class="calc">
+    <h2>One loan, three rates</h2>
+    <p class="hint">Set the amount and tenure once. Then drag each lane's rate to match a real offer you're holding.</p>
+    <div class="field">
+      <label>Loan amount <output id="o-amt">₹50,00,000</output></label>
+      <div class="slider-row"><input type="range" id="r-amt" min="50000" max="10000000" step="50000" value="5000000" aria-label="Loan amount"><input type="number" id="n-amt" min="0" value="5000000" aria-label="Loan amount in rupees"></div>
+    </div>
+    <div class="field">
+      <label>Tenure <output id="o-ten">240 months (20 yrs)</output></label>
+      <div class="slider-row"><input type="range" id="r-ten" min="6" max="360" step="6" value="240" aria-label="Tenure in months"><input type="number" id="n-ten" min="1" value="240" aria-label="Tenure in months"></div>
+    </div>
+
+    <div class="lanes">
+      <div class="lane" id="lane-0">
+        <div class="tag">Cheapest</div>
+        <h3>Lane A</h3>
+        <div class="field">
+          <label>Interest rate <output id="o-rate-0">8.5% p.a.</output></label>
+          <div class="slider-row"><input type="range" id="r-rate-0" min="5" max="20" step="0.05" value="8.5" aria-label="Lane A interest rate"><input type="number" id="n-rate-0" min="0" step="0.05" value="8.5" aria-label="Lane A interest rate in percent"></div>
+        </div>
+        <div class="emi-lbl">Monthly EMI</div>
+        <div class="emi-big" id="emi-0">₹43,391</div>
+        <dl>
+          <div><span>Total interest</span><b id="int-0">—</b></div>
+          <div><span>Total payable</span><b id="tot-0">—</b></div>
+        </dl>
+      </div>
+      <div class="lane" id="lane-1">
+        <div class="tag">Cheapest</div>
+        <h3>Lane B</h3>
+        <div class="field">
+          <label>Interest rate <output id="o-rate-1">9.5% p.a.</output></label>
+          <div class="slider-row"><input type="range" id="r-rate-1" min="5" max="20" step="0.05" value="9.5" aria-label="Lane B interest rate"><input type="number" id="n-rate-1" min="0" step="0.05" value="9.5" aria-label="Lane B interest rate in percent"></div>
+        </div>
+        <div class="emi-lbl">Monthly EMI</div>
+        <div class="emi-big" id="emi-1">—</div>
+        <dl>
+          <div><span>Total interest</span><b id="int-1">—</b></div>
+          <div><span>Total payable</span><b id="tot-1">—</b></div>
+        </dl>
+      </div>
+      <div class="lane" id="lane-2">
+        <div class="tag">Cheapest</div>
+        <h3>Lane C</h3>
+        <div class="field">
+          <label>Interest rate <output id="o-rate-2">11.0% p.a.</output></label>
+          <div class="slider-row"><input type="range" id="r-rate-2" min="5" max="20" step="0.05" value="11" aria-label="Lane C interest rate"><input type="number" id="n-rate-2" min="0" step="0.05" value="11" aria-label="Lane C interest rate in percent"></div>
+        </div>
+        <div class="emi-lbl">Monthly EMI</div>
+        <div class="emi-big" id="emi-2">—</div>
+        <dl>
+          <div><span>Total interest</span><b id="int-2">—</b></div>
+          <div><span>Total payable</span><b id="tot-2">—</b></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="result">
+      <div class="lbl">Cheapest vs costliest lane</div>
+      <div class="big" id="gap-out">—</div>
+      <div class="result-grid">
+        <div><span>EMI gap per month</span><b id="emigap-out">—</b></div>
+        <div><span>Interest gap over full tenure</span><b id="intgap-out">—</b></div>
+      </div>
+      <p style="margin-top:14px; font-size:14px; color:#cfe3d8;" id="gap-note"></p>
+    </div>
+  </div>
+
+  <div class="formula">
+    <strong>The formula we use (same for every lane):</strong><br>
+    <code>EMI = P × r × (1+r)<sup>n</sup> ÷ ((1+r)<sup>n</sup> − 1)</code>, with <code>r</code> = annual rate ÷ 12 ÷ 100 and <code>n</code> = tenure in months. Reducing-balance, monthly rests — identical maths to our <a href="emi.html">EMI calculator</a>, run three times.
+  </div>
+
+  <div class="assume">
+    <strong>Assumptions:</strong> each rate is held fixed for the full tenure; fees and charges are excluded — add them to the costliest column of your own comparison before deciding. Floating rates will move; this page compares starting rates honestly, and no more than that.
+  </div>
+
+  <div class="article">
+    <h2>Why lenders quote rates and hide gaps</h2>
+    <p>"Only 0.5% more" sounds like nothing at a sales desk. Over 20 years on ₹50 lakh, that "nothing" is roughly ₹3.5–4 lakh. Lenders know the tenure multiplies quietly in the background; the comparison above puts the multiplied number in front of you, where it belongs. When two offers differ mainly in processing fee but not rate, the fee usually wins the argument — when they differ in rate, the rate almost always does.</p>
+
+    <h2>Using this for a balance transfer</h2>
+    <p>Already hold a loan? Set the amount to your outstanding balance and the tenure to your <em>remaining</em> tenure. Put your current rate in one lane and the transfer offer in another. The interest gap is your gross saving — subtract the new lender's processing fee and any prepayment penalty on the old loan. If the gap still wins by a wide margin, the switch is real; if it's close, it's marketing.</p>
+
+    <div class="faq">
+      <h2>Common questions</h2>
+      <details>
+        <summary>How much does a 1% rate difference actually matter?</summary>
+        <p>On ₹50 lakh over 20 years, about ₹7–8 lakh of total interest. The bigger the loan and the longer the tenure, the more each tenth of a percent is worth.</p>
+      </details>
+      <details>
+        <summary>Compare by EMI or by total interest?</summary>
+        <p>For the same amount and tenure they rank offers identically. Total interest is the truer cost — a lower EMI bought with a longer tenure can cost far more overall.</p>
+      </details>
+      <details>
+        <summary>Is switching lenders for a lower rate worth it?</summary>
+        <p>Only when the interest gap beats the switching costs — processing, valuation, legal, and any prepayment penalty. This page gives you the gap; subtract the costs before deciding.</p>
+      </details>
+      <details>
+        <summary>Fixed or floating?</summary>
+        <p>This page holds rates fixed to show the arithmetic. A floating rate's future path is unknowable — compare the starting gap, then judge your own room to absorb rises.</p>
+      </details>
+    </div>
+
+    <h2>Keep exploring</h2>
+    <div class="grid">
+      <div class="card"><div class="icon">🏠</div><h3>EMI Calculator</h3><p>One loan in depth — EMI, total interest, and what moves the needle.</p><a href="emi.html">Calculate →</a></div>
+      <div class="card"><div class="icon">🏔️</div><h3>Debt Avalanche Clearance</h3><p>Already have the loans? Clear them in the order that saves the most.</p><a href="avalanche.html">Plan the payoff →</a></div>
+      <div class="card"><div class="icon">🧪</div><h3>Interest Lab</h3><p>Simple vs compound interest, side by side — why the rate compounds against you.</p><a href="interest-lab.html">Run the lab →</a></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>PaisaSahi</h4>
+        <p>India's honest money guide.<br>पैसा सही — money, done right.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="emi.html">Calculators</a>
+        <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+        <a href="../our-promise.html">Our Promise</a>
+      </div>
+      <div>
+        <h4>Fine print</h4>
+        <a href="../how-we-make-money.html">How we make money</a>
+        <a href="../methodology.html">Ranking methodology</a>
+      </div>
+    </div>
+    <div class="fine">
+      PaisaSahi is an education website, not a SEBI-registered investment adviser or a bank. Content is for information only — not financial advice. We may earn affiliate commissions; this never affects rankings.
+    </div>
+  </div>
+</footer>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const fmt = n => '₹' + Math.round(n).toLocaleString('en-IN');
+
+  function emiCalc(P, annualPct, months){
+    const r = annualPct / 1200;
+    if (r === 0) return P / months;
+    const f = Math.pow(1 + r, months);
+    return P * r * f / (f - 1);
+  }
+  function pair(rId, nId){
+    const r = $(rId), n = $(nId);
+    r.addEventListener('input', () => { n.value = r.value; calc(); });
+    n.addEventListener('input', () => {
+      const v = parseFloat(n.value);
+      if (!isNaN(v)) r.value = Math.max(+r.min, Math.min(+r.max, v));
+      calc();
+    });
+  }
+  function val(nId){ const v = parseFloat($(nId).value); return isNaN(v) || v < 0 ? 0 : v; }
+
+  pair('r-amt', 'n-amt');
+  pair('r-ten', 'n-ten');
+  [0,1,2].forEach(i => pair('r-rate-' + i, 'n-rate-' + i));
+
+  function calc(){
+    const P = val('n-amt'), months = Math.max(1, Math.round(val('n-ten')));
+    $('o-amt').textContent = fmt(P);
+    const yrs = months / 12;
+    $('o-ten').textContent = months + ' months (' + (Number.isInteger(yrs) ? yrs : yrs.toFixed(1)) + ' yrs)';
+    const lanes = [0,1,2].map(i => {
+      const rate = val('n-rate-' + i);
+      $('o-rate-' + i).textContent = rate.toFixed(2).replace(/\.?0+$/, '') + '% p.a.';
+      const e = P > 0 ? emiCalc(P, rate, months) : 0;
+      const tot = e * months, interest = tot - P;
+      $('emi-' + i).textContent = fmt(e);
+      $('int-' + i).textContent = fmt(interest);
+      $('tot-' + i).textContent = fmt(tot);
+      return { i, rate, e, interest };
+    });
+    const sorted = lanes.slice().sort((a,b) => a.interest - b.interest);
+    lanes.forEach(l => $('lane-' + l.i).classList.remove('best'));
+    if (P > 0) $('lane-' + sorted[0].i).classList.add('best');
+    const emiGap = sorted[2].e - sorted[0].e, intGap = sorted[2].interest - sorted[0].interest;
+    $('gap-out').textContent = fmt(intGap);
+    $('emigap-out').textContent = fmt(emiGap) + ' / month';
+    $('intgap-out').textContent = fmt(intGap);
+    $('gap-note').textContent = P > 0
+      ? 'Choosing the ' + sorted[0].rate.toFixed(2).replace(/\.?0+$/, '') + '% lane over the ' + sorted[2].rate.toFixed(2).replace(/\.?0+$/, '') + '% lane saves ' + fmt(intGap) + ' in interest on this loan — before any fee differences.'
+      : '';
+  }
+  calc();
+</script>
+</body>
+</html>

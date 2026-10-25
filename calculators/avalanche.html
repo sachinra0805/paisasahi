@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debt Avalanche Clearance — Pay Off Debts in the Right Order | PaisaSahi</title>
+<meta name="description" content="List your debts, add one extra monthly payment, and see your debt-free date, the interest you save, and the exact payoff order. Avalanche vs snowball, simulated month by month.">
+<link rel="stylesheet" href="../assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the debt avalanche method?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Pay the minimum on every debt, and throw every spare rupee at the debt with the highest interest rate (APR). When it clears, roll its entire payment into the next-highest rate. It is the order that costs the least total interest — provably, for any set of debts."}
+    },
+    {
+      "@type": "Question",
+      "name": "Avalanche or snowball — which is better?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Avalanche (highest rate first) always costs less interest. Snowball (smallest balance first) can clear a debt sooner, which some people find motivating. If the interest difference is small, pick the one you will actually stick to — an abandoned avalanche saves nothing."}
+    },
+    {
+      "@type": "Question",
+      "name": "What if my minimum payment doesn't cover the interest?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Then that debt grows every month even while you pay — it can never clear. This page warns you if any debt is in that state. The fix is to raise that payment above the monthly interest, even slightly, or to talk to the lender about restructuring before it compounds."}
+    },
+    {
+      "@type": "Question",
+      "name": "Should I include my home loan in the avalanche?",
+      "acceptedAnswer": {"@type": "Answer", "text": "You can — the maths works for any debts. In practice most people avalanche their expensive debts first (cards, personal loans) and treat the home loan separately, because its rate is the lowest and its tenure is long. Try it both ways here and compare the interest."}
+    },
+    {
+      "@type": "Question",
+      "name": "Should I clear debt or build an emergency fund first?",
+      "acceptedAnswer": {"@type": "Answer", "text": "A small emergency cushion first — one month of expenses — so a surprise doesn't land back on the credit card. Then attack the highest-rate debt. A full emergency fund can come after the expensive debt is gone."}
+    }
+  ]
+}
+</script>
+<style>
+  .slider-row{display:flex; gap:12px; align-items:center;}
+  .slider-row input[type=range]{flex:1;}
+  .slider-row input[type=number]{width:140px; padding:10px 12px; border:1.5px solid var(--line); border-radius:12px; font-size:15px; background:#fff;}
+  .slider-row input[type=number]:focus{outline:none; border-color:var(--green-bright); box-shadow:0 0 0 4px rgba(16,165,110,.15);}
+  @media(max-width:560px){ .slider-row{flex-wrap:wrap;} .slider-row input[type=number]{width:100%;} }
+  .debt-row{display:grid; grid-template-columns:1.3fr 1fr .7fr 1fr auto; gap:10px; align-items:end;
+    background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px; margin-bottom:12px;}
+  .debt-row label{font-size:12.5px; font-weight:600; color:var(--muted); display:block;}
+  .debt-row input{width:100%; padding:10px 11px; border:1.5px solid var(--line); border-radius:10px; font-size:15px; background:#fff; margin-top:5px;}
+  .debt-row input:focus{outline:none; border-color:var(--green-bright); box-shadow:0 0 0 4px rgba(16,165,110,.15);}
+  .debt-row .d-del{background:#fdf0ec; color:var(--red); border:1px solid #eccfc8; border-radius:10px;
+    width:40px; height:42px; font-size:16px; cursor:pointer;}
+  .debt-row .d-del:hover{background:#fbe3dc;}
+  @media(max-width:700px){ .debt-row{grid-template-columns:1fr 1fr;} .debt-row .d-del{grid-column:2; justify-self:end;} }
+  .add-btn{background:#fff; color:var(--green-dark); border:1.5px dashed var(--green); border-radius:999px;
+    padding:10px 22px; font-weight:600; font-size:15px; cursor:pointer;}
+  .add-btn:hover{background:#eafaf2;}
+  .seg{display:flex; gap:10px; flex-wrap:wrap;}
+  .seg button{flex:1; min-width:220px; padding:14px 16px; border-radius:14px; border:1.5px solid var(--line);
+    background:#fff; cursor:pointer; text-align:left; font-size:15px;}
+  .seg button b{display:block; font-size:16px; color:var(--green-ink);}
+  .seg button span{color:var(--muted); font-size:13.5px;}
+  .seg button.on{border-color:var(--green); background:#eafaf2; box-shadow:0 0 0 4px rgba(16,165,110,.12);}
+  .warnbox{display:none; background:#fdf0ec; border:1px solid #eccfc8; border-left:5px solid var(--red);
+    border-radius:14px; padding:18px 22px; margin:20px 0; font-size:15.5px;}
+  .warnbox b{color:var(--red);}
+  .order-list{margin:6px 0 0 22px;}
+  .order-list li{margin-bottom:8px; font-size:16px;}
+</style>
+</head>
+<body>
+
+<div class="ribbon">No spam calls &nbsp;·&nbsp; No bought rankings &nbsp;·&nbsp; <b>Free forever</b></div>
+
+<header class="site">
+  <div class="nav">
+    <a class="logo" href="../index.html">Paisa<span>Sahi</span></a>
+    <div class="nav-links">
+      <a href="emi.html">Calculators</a>
+      <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+      <a href="#">Guides</a>
+      <a href="../our-promise.html">Our Promise</a>
+      <a class="btn" href="#">Get the letter</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="emi.html">Calculators</a> › Debt Avalanche Clearance</div>
+
+  <div class="page-head">
+    <div class="kicker">New view</div>
+    <h1>Debt Avalanche Clearance</h1>
+    <p class="lede">The order you clear debts in changes what they cost you — by lakhs, sometimes. List every debt, add one extra monthly payment, and watch the plan build itself.</p>
+    <div class="updated">Updated: October 2026</div>
+  </div>
+
+  <div class="answer-box">
+    <strong>The one-line answer:</strong> pay the minimum on everything, then aim every spare rupee at the <strong>highest interest rate</strong> — not the biggest loan, not the loudest lender. That's the avalanche, and it's the cheapest order there is.
+  </div>
+
+  <div class="calc">
+    <h2>Your debts</h2>
+    <p class="hint">Add a row for every debt. Minimum payment = the fixed amount you must pay each month (for a credit card, use what you actually pay, not the minimum-due figure).</p>
+    <div id="debts"></div>
+    <button class="add-btn" id="add-debt" type="button">+ Add a debt</button>
+
+    <div class="field" style="margin-top:26px;">
+      <label>Extra payment per month (on top of all minimums) <output id="o-extra">₹7,500</output></label>
+      <div class="slider-row"><input type="range" id="r-extra" min="0" max="100000" step="500" value="7500" aria-label="Extra payment per month"><input type="number" id="n-extra" min="0" value="7500" aria-label="Extra payment per month in rupees"></div>
+    </div>
+
+    <div class="field">
+      <label style="margin-bottom:10px;">Strategy</label>
+      <div class="seg">
+        <button type="button" id="seg-avalanche" class="on"><b>🏔️ Avalanche</b><span>Highest interest rate first — least total interest</span></button>
+        <button type="button" id="seg-snowball"><b>⛄ Snowball</b><span>Smallest balance first — quickest first win</span></button>
+      </div>
+    </div>
+
+    <div class="warnbox" id="warn"></div>
+
+    <div class="result" id="result-panel">
+      <div class="lbl">Debt-free by</div>
+      <div class="big" id="df-out">—</div>
+      <div class="result-grid">
+        <div><span>Time to clear</span><b id="months-out">—</b></div>
+        <div><span>Interest with this plan</span><b id="int-out">—</b></div>
+        <div><span>Interest on minimums only</span><b id="base-out">—</b></div>
+        <div><span>Interest saved</span><b id="saved-out">—</b></div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Fraunces',Georgia,serif; font-size:21px; color:var(--green-dark); margin:24px 0 10px;">Your payoff order</h3>
+    <ol class="order-list" id="order-out"></ol>
+    <p class="micro">Runs entirely in your browser — nothing you type is sent or saved.</p>
+  </div>
+
+  <div class="formula">
+    <strong>How the simulation works:</strong> month by month, each debt first accrues interest (<code>balance × APR ÷ 12</code>). Every debt then gets its minimum payment. The extra pool — your extra payment <em>plus the minimums of every debt already cleared</em> — goes to the target debt (highest APR for avalanche, smallest balance for snowball), cascading to the next debt if the target clears mid-month. The "minimums only" comparison keeps paying each minimum until that debt clears, with no roll-over.
+  </div>
+
+  <div class="assume">
+    <strong>Assumptions:</strong> fixed APRs and fixed minimum payments for the whole period; no new borrowing; no prepayment penalties or charges. Real cards vary the minimum due with the balance — if yours does, use a realistic average payment. Rates that float will move the dates, not the logic.
+  </div>
+
+  <div class="article">
+    <h2>Why the order matters this much</h2>
+    <p>A rupee of extra payment kills interest at the rate of the debt it lands on. Put ₹10,000 extra against a 42% credit card and it saves ₹4,200 a year in interest. Put the same ₹10,000 against a 9% home loan and it saves ₹900. Same money, same month — nearly five times the effect. The avalanche is simply the discipline of always landing the extra rupee where the rate is highest.</p>
+
+    <h2>The honest case for the snowball</h2>
+    <p>Snowball — smallest balance first — always costs a bit more interest. What it buys is an early win: a debt gone entirely, one less bill each month. If you've started and abandoned payoff plans before, that momentum may be worth more than the interest difference. Run both strategies above; when the gap is small, pick the one you'll still be following in month six.</p>
+
+    <div class="faq">
+      <h2>Common questions</h2>
+      <details>
+        <summary>What is the debt avalanche method?</summary>
+        <p>Pay the minimum on every debt, and throw every spare rupee at the highest interest rate. When it clears, roll its full payment into the next-highest rate. It's the order that costs the least total interest.</p>
+      </details>
+      <details>
+        <summary>Avalanche or snowball — which is better?</summary>
+        <p>Avalanche always costs less interest. Snowball can clear a debt sooner, which keeps some people going. The best plan is the one you don't abandon.</p>
+      </details>
+      <details>
+        <summary>What if my minimum doesn't cover the interest?</summary>
+        <p>That debt grows every month and can never clear — this page warns you when it happens. Raise that payment above the monthly interest, even slightly, or ask the lender about restructuring.</p>
+      </details>
+      <details>
+        <summary>Should I include my home loan?</summary>
+        <p>You can. Most people avalanche the expensive debts first and treat the home loan separately, since its rate is lowest and its tenure longest. Try it both ways and compare the interest line.</p>
+      </details>
+      <details>
+        <summary>Debt first, or emergency fund first?</summary>
+        <p>A small cushion first — about a month of expenses — so a surprise doesn't go straight back on the card. Then the avalanche. Grow the full fund after the costly debt is gone.</p>
+      </details>
+    </div>
+
+    <h2>Keep exploring</h2>
+    <div class="grid">
+      <div class="card"><div class="icon">🧮</div><h3>My Balance Sheet</h3><p>See all of it at once — what you own vs what you owe, and your net worth.</p><a href="balance-sheet.html">Build yours →</a></div>
+      <div class="card"><div class="icon">💳</div><h3>Credit Card Truth</h3><p>What your card's APR really is, and how the minimum-due trap works.</p><a href="card-truth.html">See the truth →</a></div>
+      <div class="card"><div class="icon">🏠</div><h3>EMI Calculator</h3><p>Check any single loan's true cost before adding it to the pile.</p><a href="emi.html">Calculate →</a></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>PaisaSahi</h4>
+        <p>India's honest money guide.<br>पैसा सही — money, done right.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="emi.html">Calculators</a>
+        <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+        <a href="../our-promise.html">Our Promise</a>
+      </div>
+      <div>
+        <h4>Fine print</h4>
+        <a href="../how-we-make-money.html">How we make money</a>
+        <a href="../methodology.html">Ranking methodology</a>
+      </div>
+    </div>
+    <div class="fine">
+      PaisaSahi is an education website, not a SEBI-registered investment adviser or a bank. Content is for information only — not financial advice. We may earn affiliate commissions; this never affects rankings.
+    </div>
+  </div>
+</footer>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const fmt = n => '₹' + Math.round(n).toLocaleString('en-IN');
+  let strategy = 'avalanche';
+
+  // --- Core simulation (month by month) ---
+  function simulateDebts(debtsIn, extra, strat, rollFreed){
+    const MAX_MONTHS = 600;
+    const ds = debtsIn.filter(d => d.balance > 0)
+      .map(d => ({ name: d.name, balance: d.balance, apr: d.apr, min: d.min, clearedMonth: null }));
+    for (const d of ds) {
+      if (d.min <= d.balance * d.apr / 1200) {
+        return { ok: false, warning: d.name };
+      }
+    }
+    if (!ds.length) return { ok: true, empty: true, months: 0, totalInterest: 0, order: [] };
+    let totalInterest = 0, freedMin = 0;
+    for (let month = 1; month <= MAX_MONTHS; month++) {
+      for (const d of ds) {
+        if (d.balance > 0) { const i = d.balance * d.apr / 1200; d.balance += i; totalInterest += i; }
+      }
+      for (const d of ds) {
+        if (d.balance > 0) {
+          d.balance -= Math.min(d.min, d.balance);
+          if (d.balance <= 0.005) { d.balance = 0; if (d.clearedMonth === null) d.clearedMonth = month; }
+        }
+      }
+      let pool = extra + (rollFreed ? freedMin : 0);
+      while (pool > 0.005) {
+        const active = ds.filter(d => d.balance > 0);
+        if (!active.length) break;
+        const target = strat === 'snowball'
+          ? active.slice().sort((a,b) => (a.balance - b.balance) || (b.apr - a.apr))[0]
+          : active.slice().sort((a,b) => (b.apr - a.apr) || (a.balance - b.balance))[0];
+        const pay = Math.min(pool, target.balance);
+        target.balance -= pay; pool -= pay;
+        if (target.balance <= 0.005) { target.balance = 0; if (target.clearedMonth === null) target.clearedMonth = month; }
+      }
+      if (rollFreed) for (const d of ds) if (d.clearedMonth === month) freedMin += d.min;
+      if (ds.every(d => d.balance <= 0)) {
+        return { ok: true, months: month, totalInterest,
+                 order: ds.slice().sort((a,b) => a.clearedMonth - b.clearedMonth)
+                          .map(d => ({ name: d.name, month: d.clearedMonth })) };
+      }
+    }
+    return { ok: true, months: MAX_MONTHS, capped: true, totalInterest,
+             order: ds.filter(d => d.clearedMonth !== null)
+                      .sort((a,b) => a.clearedMonth - b.clearedMonth)
+                      .map(d => ({ name: d.name, month: d.clearedMonth })) };
+  }
+
+  function monthYear(monthsFromNow){
+    const d = new Date(); d.setMonth(d.getMonth() + monthsFromNow);
+    return d.toLocaleString('en-IN', { month: 'long', year: 'numeric' });
+  }
+  function duration(months){
+    const y = Math.floor(months / 12), m = months % 12;
+    return (y ? y + (y === 1 ? ' yr ' : ' yrs ') : '') + (m ? m + (m === 1 ? ' mo' : ' mos') : (y ? '' : '0 mos'));
+  }
+
+  // --- Dynamic debt rows ---
+  const debtsEl = $('debts');
+  function addRow(name, balance, apr, min){
+    const row = document.createElement('div');
+    row.className = 'debt-row';
+    row.innerHTML =
+      '<div><label>Debt name<input type="text" class="d-name" value="' + name + '"></label></div>' +
+      '<div><label>Balance ₹<input type="number" class="d-bal" min="0" step="any" value="' + balance + '"></label></div>' +
+      '<div><label>APR %<input type="number" class="d-apr" min="0" step="any" value="' + apr + '"></label></div>' +
+      '<div><label>Minimum ₹/month<input type="number" class="d-min" min="0" step="any" value="' + min + '"></label></div>' +
+      '<button type="button" class="d-del" title="Remove this debt" aria-label="Remove this debt">✕</button>';
+    row.querySelector('.d-del').addEventListener('click', () => { row.remove(); calc(); });
+    row.querySelectorAll('input').forEach(el => el.addEventListener('input', calc));
+    debtsEl.appendChild(row);
+  }
+  $('add-debt').addEventListener('click', () => { addRow('New debt', 50000, 18, 2500); calc(); });
+
+  function readDebts(){
+    return Array.from(debtsEl.querySelectorAll('.debt-row')).map(row => ({
+      name: row.querySelector('.d-name').value.trim() || 'Debt',
+      balance: parseFloat(row.querySelector('.d-bal').value) || 0,
+      apr: parseFloat(row.querySelector('.d-apr').value) || 0,
+      min: parseFloat(row.querySelector('.d-min').value) || 0
+    }));
+  }
+
+  // --- Extra payment slider/number pair ---
+  const rExtra = $('r-extra'), nExtra = $('n-extra');
+  rExtra.addEventListener('input', () => { nExtra.value = rExtra.value; calc(); });
+  nExtra.addEventListener('input', () => {
+    const v = parseFloat(nExtra.value);
+    if (!isNaN(v)) rExtra.value = Math.max(0, Math.min(100000, v));
+    calc();
+  });
+
+  // --- Strategy toggle ---
+  $('seg-avalanche').addEventListener('click', () => { strategy = 'avalanche'; $('seg-avalanche').classList.add('on'); $('seg-snowball').classList.remove('on'); calc(); });
+  $('seg-snowball').addEventListener('click', () => { strategy = 'snowball'; $('seg-snowball').classList.add('on'); $('seg-avalanche').classList.remove('on'); calc(); });
+
+  function calc(){
+    const extra = Math.max(0, parseFloat(nExtra.value) || 0);
+    $('o-extra').textContent = fmt(extra);
+    const debts = readDebts();
+    const warn = $('warn'), orderOut = $('order-out');
+
+    const strat = simulateDebts(debts, extra, strategy, true);
+    if (!strat.ok) {
+      warn.style.display = 'block';
+      warn.innerHTML = '<b>⚠ One debt can never clear:</b> the minimum payment on <b>' + strat.warning + '</b> doesn\'t cover its monthly interest, so the balance grows even while you pay. Raise that payment above the monthly interest — or speak to the lender about restructuring — before any payoff plan can work.';
+      $('df-out').textContent = '—';
+      $('months-out').textContent = '—'; $('int-out').textContent = '—';
+      $('base-out').textContent = '—'; $('saved-out').textContent = '—';
+      orderOut.innerHTML = '';
+      return;
+    }
+    warn.style.display = 'none';
+    if (strat.empty) {
+      $('df-out').textContent = 'Already there 🎉';
+      $('months-out').textContent = '0'; $('int-out').textContent = fmt(0);
+      $('base-out').textContent = fmt(0); $('saved-out').textContent = fmt(0);
+      orderOut.innerHTML = '<li>No debts listed — nothing to clear.</li>';
+      return;
+    }
+    const base = simulateDebts(debts, 0, 'avalanche', false);
+    $('df-out').textContent = strat.capped ? 'Not within 50 years' : monthYear(strat.months);
+    $('months-out').textContent = strat.capped ? '600+ months' : duration(strat.months) + ' (' + strat.months + ' months)';
+    $('int-out').textContent = fmt(strat.totalInterest) + (strat.capped ? '+' : '');
+    if (base.ok && !base.capped) {
+      $('base-out').textContent = fmt(base.totalInterest);
+      $('saved-out').textContent = strat.capped ? '—' : fmt(base.totalInterest - strat.totalInterest);
+    } else {
+      $('base-out').textContent = 'Never clears';
+      $('saved-out').textContent = strat.capped ? '—' : 'You finish; minimums don\'t';
+    }
+    orderOut.innerHTML = strat.order.map(o =>
+      '<li><b>' + o.name + '</b> — clear by ' + monthYear(o.month) + ' (month ' + o.month + ')</li>').join('')
+      || '<li>Nothing clears within 50 years at these payments — raise the extra payment or a minimum.</li>';
+  }
+
+  addRow('Credit card', 85000, 42, 4250);
+  addRow('Personal loan', 240000, 15, 7200);
+  addRow('Consumer durable loan', 45000, 12, 3000);
+  calc();
+</script>
+</body>
+</html>

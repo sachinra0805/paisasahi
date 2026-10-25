@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credit Card Truth — APR, the Minimum-Due Trap & the Fee Stack | PaisaSahi</title>
+<meta name="description" content="What your credit card really costs: convert the monthly rate to a true APR, simulate the minimum-due trap month by month, and see the common fee stack in one honest table.">
+<link rel="stylesheet" href="../assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is credit card APR in India?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Indian credit cards quote interest monthly — commonly around 3% to 4.2% per month. The nominal APR is that monthly rate times 12, but the effective annual rate is higher because interest compounds monthly: 3.5% per month is 42% nominal and about 51.1% effective per year."}
+    },
+    {
+      "@type": "Question",
+      "name": "How does the minimum-due trap work?",
+      "acceptedAnswer": {"@type": "Answer", "text": "The minimum due is typically a small percentage of your outstanding balance — often around 5%. Because it shrinks as the balance shrinks, so does your payment. On a ₹1 lakh balance at 42% APR, paying only the minimum can take over 18 years and cost more than ₹2 lakh in interest — over twice the amount you borrowed."}
+    },
+    {
+      "@type": "Question",
+      "name": "When is a credit card actually interest-free?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Only when you pay the previous statement's full amount by the due date. The interest-free period — typically up to about 45–50 days — applies to new purchases only if the previous bill was paid in full. Carry even ₹1 forward and new purchases usually start accruing interest from the day of purchase."}
+    },
+    {
+      "@type": "Question",
+      "name": "Are these fee figures exact for my card?",
+      "acceptedAnswer": {"@type": "Answer", "text": "No — and any site quoting one exact fee for all cards is inventing it. The fee table here shows typical ranges seen across mass-market Indian cards. Your card's exact figures are in its MITC (Most Important Terms & Conditions) document, which your issuer must give you. Check that before relying on any range."}
+    }
+  ]
+}
+</script>
+<style>
+  .slider-row{display:flex; gap:12px; align-items:center;}
+  .slider-row input[type=range]{flex:1;}
+  .slider-row input[type=number]{width:140px; padding:10px 12px; border:1.5px solid var(--line); border-radius:12px; font-size:15px; background:#fff;}
+  .slider-row input[type=number]:focus{outline:none; border-color:var(--green-bright); box-shadow:0 0 0 4px rgba(16,165,110,.15);}
+  @media(max-width:560px){ .slider-row{flex-wrap:wrap;} .slider-row input[type=number]{width:100%;} }
+  .warnbox{display:none; background:#fdf0ec; border:1px solid #eccfc8; border-left:5px solid var(--red);
+    border-radius:14px; padding:18px 22px; margin:20px 0; font-size:15.5px;}
+  .warnbox b{color:var(--red);}
+  .trapcalc{margin-top:34px;}
+</style>
+</head>
+<body>
+
+<div class="ribbon">No spam calls &nbsp;·&nbsp; No bought rankings &nbsp;·&nbsp; <b>Free forever</b></div>
+
+<header class="site">
+  <div class="nav">
+    <a class="logo" href="../index.html">Paisa<span>Sahi</span></a>
+    <div class="nav-links">
+      <a href="emi.html">Calculators</a>
+      <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+      <a href="#">Guides</a>
+      <a href="../our-promise.html">Our Promise</a>
+      <a class="btn" href="#">Get the letter</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="emi.html">Calculators</a> › Credit Card Truth</div>
+
+  <div class="page-head">
+    <div class="kicker">New view</div>
+    <h1>Credit Card Truth: APR &amp; Fees</h1>
+    <p class="lede">Cards are sold on points and lounges. They're priced in a monthly percentage almost nobody annualises, a minimum due designed to stretch your debt for years, and a fee stack printed in a document most people never open. Let's open it.</p>
+    <div class="updated">Updated: October 2026</div>
+  </div>
+
+  <div class="answer-box">
+    <strong>The one-line answer:</strong> a "3.5% per month" card charges an <strong>effective 51.1% per year</strong> — and paying only the minimum due on ₹1 lakh at that rate takes <strong>18+ years</strong> and over <strong>₹2 lakh of interest</strong>.
+  </div>
+
+  <div class="calc">
+    <h2>1 · The APR converter</h2>
+    <p class="hint">Your card's terms quote a monthly rate. Here's what it really is per year.</p>
+    <div class="field">
+      <label>Monthly interest rate on your card <output id="o-mon">3.5% / month</output></label>
+      <div class="slider-row"><input type="range" id="r-mon" min="0.5" max="5" step="0.1" value="3.5" aria-label="Monthly interest rate"><input type="number" id="n-mon" min="0" step="0.1" value="3.5" aria-label="Monthly interest rate in percent"></div>
+    </div>
+    <div class="result">
+      <div class="lbl">Effective annual rate (the true APR)</div>
+      <div class="big" id="eff-out">51.1%</div>
+      <div class="result-grid">
+        <div><span>Nominal APR (monthly × 12)</span><b id="nom-out">42.0%</b></div>
+        <div><span>Interest on ₹10,000 carried a full year</span><b id="carry-out">₹5,111</b></div>
+      </div>
+      <p style="margin-top:14px; font-size:14px; color:#cfe3d8;">The effective rate is higher than monthly × 12 because each month's interest itself earns interest. Add 18% GST on the interest, which issuers charge on top.</p>
+    </div>
+  </div>
+
+  <div class="calc trapcalc">
+    <h2>2 · The minimum-due trap</h2>
+    <p class="hint">The minimum due feels like a payment plan. It isn't — it's a slow-drip. Simulate paying <em>only</em> the minimum, every month, no new spending.</p>
+    <div class="field">
+      <label>Card balance today <output id="o-bal">₹1,00,000</output></label>
+      <div class="slider-row"><input type="range" id="r-bal" min="5000" max="1000000" step="1000" value="100000" aria-label="Card balance"><input type="number" id="n-bal" min="0" value="100000" aria-label="Card balance in rupees"></div>
+    </div>
+    <div class="field">
+      <label>Card APR <output id="o-apr">42.0% p.a.</output></label>
+      <div class="slider-row"><input type="range" id="r-apr" min="12" max="48" step="0.5" value="42" aria-label="Card APR"><input type="number" id="n-apr" min="0" step="0.5" value="42" aria-label="Card APR in percent"></div>
+    </div>
+    <div class="field">
+      <label>Minimum due (% of balance) <output id="o-minpct">5.0%</output></label>
+      <div class="slider-row"><input type="range" id="r-minpct" min="1" max="15" step="0.5" value="5" aria-label="Minimum due percent"><input type="number" id="n-minpct" min="0" step="0.5" value="5" aria-label="Minimum due percent"></div>
+    </div>
+    <div class="field">
+      <label>Minimum due floor (₹) <span style="font-weight:400; color:var(--muted);">— the rupee minimum most cards set</span></label>
+      <input type="number" id="n-floor" min="0" step="50" value="200" aria-label="Minimum due floor in rupees" style="width:100%; padding:13px 14px; border:1.5px solid var(--line); border-radius:12px; font-size:16px; background:#fff;">
+    </div>
+
+    <div class="warnbox" id="trap-warn"></div>
+
+    <div class="result">
+      <div class="lbl">Time to clear, paying only the minimum</div>
+      <div class="big" id="trap-time">18 yrs 10 mos</div>
+      <div class="result-grid">
+        <div><span>Months</span><b id="trap-months">226</b></div>
+        <div><span>Total interest paid</span><b id="trap-int">₹2,03,573</b></div>
+        <div><span>Total paid overall</span><b id="trap-tot">₹3,03,573</b></div>
+      </div>
+      <p style="margin-top:14px; font-size:14px; color:#cfe3d8;" id="trap-note"></p>
+    </div>
+    <p class="micro">The way out isn't a bigger minimum — it's a fixed payment. Take the first month's minimum and keep paying that same rupee amount every month; the balance falls instead of the payment. Or run your cards through the <a href="avalanche.html" style="color:var(--green); font-weight:600;">Avalanche planner</a>.</p>
+  </div>
+
+  <div class="formula">
+    <strong>The formulas we use:</strong><br>
+    Nominal APR: <code>monthly % × 12</code> &nbsp;·&nbsp; Effective annual rate: <code>((1 + monthly ÷ 100)<sup>12</sup> − 1) × 100</code><br>
+    Trap simulation: month by month — interest accrues at <code>APR ÷ 12</code> on the balance, then you pay <code>max(minimum % of balance, floor)</code>, capped at the balance. No new spending, no fees, no GST in the simulation — reality is worse.
+  </div>
+
+  <div class="article">
+    <h2>3 · The common fee stack</h2>
+    <p>Every card carries the same family of charges, whatever the branding. These are <strong>typical ranges across mass-market Indian cards — indicative, not facts about any specific card</strong>. Issuers differ, slabs change, and your card's MITC (Most Important Terms &amp; Conditions) is the only exact source.</p>
+    <table>
+      <thead><tr><th>Charge</th><th>Typical range</th><th>The part they don't advertise</th></tr></thead>
+      <tbody>
+        <tr><td><b>Joining / annual fee</b></td><td>₹0 to ₹5,000+ (entry cards commonly ₹499–₹1,499; premium cards far higher)</td><td>Often waived above a yearly spend threshold — check whether you'd cross it with spending you'd do anyway.</td></tr>
+        <tr><td><b>Finance charge (interest)</b></td><td>~3.0%–4.2% per month (≈36%–50%+ effective per year)</td><td>Charged from the transaction date on new purchases if the previous bill wasn't paid in full.</td></tr>
+        <tr><td><b>Late payment fee</b></td><td>Slab-based, typically ~₹100–₹1,300 depending on statement balance</td><td>Plus interest on the whole balance, plus a possible credit-score hit if reported unpaid.</td></tr>
+        <tr><td><b>Cash advance fee</b></td><td>~2.5% of the amount withdrawn, minimum ~₹300–₹500</td><td>Interest starts the same day — cash withdrawals get no interest-free period at all.</td></tr>
+        <tr><td><b>Over-limit fee</b></td><td>~2.5% of the over-limit amount, minimum ~₹400–₹550</td><td>Can trigger even when the issuer approved the transaction that crossed the limit.</td></tr>
+        <tr><td><b>Forex markup</b></td><td>~0.99%–3.5% on foreign-currency spends</td><td>Applies to "international" transactions even when you're sitting in India paying a foreign website.</td></tr>
+        <tr><td><b>Interest-free period</b></td><td>Up to ~45–50 days</td><td>Only on new purchases, and only when the previous statement was paid in full by the due date.</td></tr>
+        <tr><td><b>GST</b></td><td>18% on fees and on interest</td><td>Added on top of nearly every line above — the fee you see is not the fee you pay.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="illustrative">
+      <b>Honesty note:</b> we publish ranges here, not exact card-by-card fees, because exact figures change and vary by card variant. <b>Check your own card's MITC for exact figures</b> — your issuer is required to provide it, and it's the document that governs what you'll actually be charged.
+    </div>
+
+    <h2>How to use a card without feeding it</h2>
+    <p>Three habits neutralise almost everything on this page: pay the <em>full</em> statement amount, not the minimum or the "total due minus a bit"; never withdraw cash on the card; and treat the interest-free period as a perk that exists only while the first habit holds. Do those and the fee stack shrinks to the annual fee — which is exactly the number our <a href="card-value.html">Card Value Checker</a> tests against your rewards.</p>
+
+    <div class="faq">
+      <h2>Common questions</h2>
+      <details>
+        <summary>What is credit card APR in India?</summary>
+        <p>Cards quote interest monthly, commonly ~3%–4.2%. Nominal APR is monthly × 12; the effective annual rate is higher due to monthly compounding — 3.5%/month is 42% nominal but about 51.1% effective.</p>
+      </details>
+      <details>
+        <summary>How does the minimum-due trap work?</summary>
+        <p>The minimum due is usually a small % of the outstanding, so your payment shrinks as the balance shrinks — stretching repayment for years. On ₹1 lakh at 42% APR, minimum-only payments can take 18+ years and cost over ₹2 lakh in interest.</p>
+      </details>
+      <details>
+        <summary>When is a card actually interest-free?</summary>
+        <p>Only when the previous statement was paid in full by the due date. Carry anything forward and new purchases typically accrue interest from the day of purchase.</p>
+      </details>
+      <details>
+        <summary>Are these fee figures exact for my card?</summary>
+        <p>No — they're typical ranges, labelled as such. Your exact figures live in your card's MITC document. Any site quoting one exact fee for every card is making it up.</p>
+      </details>
+    </div>
+
+    <h2>Keep exploring</h2>
+    <div class="grid">
+      <div class="card"><div class="icon">💳</div><h3>Card Value Checker</h3><p>The other half of the story: do your rewards beat the annual fee?</p><a href="card-value.html">Check →</a></div>
+      <div class="card"><div class="icon">🏔️</div><h3>Debt Avalanche Clearance</h3><p>Carrying a balance? Clear it in the order that saves the most interest.</p><a href="avalanche.html">Plan the payoff →</a></div>
+      <div class="card"><div class="icon">🎯</div><h3>CIBIL Planner</h3><p>Late payments scar your score. A 90-day plan to lift it.</p><a href="cibil-planner.html">Plan →</a></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>PaisaSahi</h4>
+        <p>India's honest money guide.<br>पैसा सही — money, done right.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="emi.html">Calculators</a>
+        <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+        <a href="../our-promise.html">Our Promise</a>
+      </div>
+      <div>
+        <h4>Fine print</h4>
+        <a href="../how-we-make-money.html">How we make money</a>
+        <a href="../methodology.html">Ranking methodology</a>
+      </div>
+    </div>
+    <div class="fine">
+      PaisaSahi is an education website, not a SEBI-registered investment adviser or a bank. Content is for information only — not financial advice. We may earn affiliate commissions; this never affects rankings.
+    </div>
+  </div>
+</footer>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const fmt = n => '₹' + Math.round(n).toLocaleString('en-IN');
+
+  function pair(rId, nId, cb){
+    const r = $(rId), n = $(nId);
+    r.addEventListener('input', () => { n.value = r.value; cb(); });
+    n.addEventListener('input', () => {
+      const v = parseFloat(n.value);
+      if (!isNaN(v)) r.value = Math.max(+r.min, Math.min(+r.max, v));
+      cb();
+    });
+  }
+  function val(nId){ const v = parseFloat($(nId).value); return isNaN(v) || v < 0 ? 0 : v; }
+
+  // --- APR converter ---
+  function calcApr(){
+    const m = val('n-mon');
+    $('o-mon').textContent = m.toFixed(1) + '% / month';
+    const eff = (Math.pow(1 + m / 100, 12) - 1) * 100;
+    $('nom-out').textContent = (m * 12).toFixed(1) + '%';
+    $('eff-out').textContent = eff.toFixed(1) + '%';
+    $('carry-out').textContent = fmt(10000 * eff / 100);
+  }
+  pair('r-mon', 'n-mon', calcApr);
+
+  // --- Minimum-due trap ---
+  function minDueTrap(balance, aprPct, minPct, floor){
+    const r = aprPct / 1200;
+    let bal = balance, months = 0, totalInterest = 0, totalPaid = 0;
+    const MAX = 1200;
+    while (bal > 0.005 && months < MAX) {
+      const interest = bal * r;
+      bal += interest; totalInterest += interest;
+      const pay = Math.min(Math.max(minPct / 100 * bal, floor), bal);
+      if (pay <= interest && bal - pay > 0.005) {
+        return { ok: false, months, totalInterest, totalPaid };
+      }
+      bal -= pay; totalPaid += pay; months++;
+    }
+    if (bal > 0.005) return { ok: false, months, totalInterest, totalPaid };
+    return { ok: true, months, totalInterest, totalPaid };
+  }
+  function duration(months){
+    const y = Math.floor(months / 12), m = months % 12;
+    return (y ? y + (y === 1 ? ' yr ' : ' yrs ') : '') + (m ? m + (m === 1 ? ' mo' : ' mos') : (y ? '' : '0 mos'));
+  }
+  function calcTrap(){
+    const bal = val('n-bal'), apr = val('n-apr'), pct = val('n-minpct'), floor = val('n-floor');
+    $('o-bal').textContent = fmt(bal);
+    $('o-apr').textContent = apr.toFixed(1) + '% p.a.';
+    $('o-minpct').textContent = pct.toFixed(1) + '%';
+    const res = minDueTrap(bal, apr, pct, floor);
+    const warn = $('trap-warn');
+    if (!res.ok) {
+      warn.style.display = 'block';
+      warn.innerHTML = '<b>⚠ This never clears:</b> at these settings the minimum due doesn\'t cover the monthly interest (or takes over a century), so the balance stands still or grows while you pay. Raise the payment — a fixed amount above the monthly interest is the minimum viable plan.';
+      $('trap-time').textContent = 'Never, at this rate';
+      $('trap-months').textContent = '—';
+      $('trap-int').textContent = fmt(res.totalInterest) + '+';
+      $('trap-tot').textContent = fmt(res.totalPaid) + '+';
+      $('trap-note').textContent = '';
+      return;
+    }
+    warn.style.display = 'none';
+    $('trap-time').textContent = duration(res.months);
+    $('trap-months').textContent = res.months;
+    $('trap-int').textContent = fmt(res.totalInterest);
+    $('trap-tot').textContent = fmt(res.totalPaid);
+    $('trap-note').textContent = bal > 0
+      ? 'Borrow ' + fmt(bal) + ', pay back ' + fmt(res.totalPaid) + '. The interest alone is ' + (res.totalInterest / bal).toFixed(1) + '× what you borrowed.'
+      : '';
+  }
+  pair('r-bal', 'n-bal', calcTrap);
+  pair('r-apr', 'n-apr', calcTrap);
+  pair('r-minpct', 'n-minpct', calcTrap);
+  $('n-floor').addEventListener('input', calcTrap);
+
+  calcApr();
+  calcTrap();
+</script>
+</body>
+</html>

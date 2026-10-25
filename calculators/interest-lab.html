@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interest Lab — Simple vs Compound Interest | PaisaSahi</title>
+<meta name="description" content="Simple interest vs compound interest on the same money, side by side — plus a year-by-year table and a compounding-frequency switch. See exactly where the gap comes from.">
+<link rel="stylesheet" href="../assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the difference between simple and compound interest?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Simple interest is charged or paid only on the original principal. Compound interest is paid on principal plus all interest already earned — interest on interest. Over one year the two are close; over ten or twenty years the compounding gap becomes the whole story."}
+    },
+    {
+      "@type": "Question",
+      "name": "Where is simple interest actually used in India?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Simple interest shows up in some short-term loans, late-payment and penalty calculations, and as the quoting convention for some instruments. Most deposits and virtually all loans in India compound — bank FDs typically compound quarterly."}
+    },
+    {
+      "@type": "Question",
+      "name": "How often do Indian bank FDs compound?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Most Indian bank fixed deposits compound quarterly — interest is added to the deposit every three months and then itself earns interest. That is why the effective yield on an FD is slightly higher than the headline rate."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is the Rule of 72?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Divide 72 by the annual compound rate to estimate how many years money takes to double. At 8%, about 9 years; at 12%, about 6 years. It works only for compound interest — simple interest never speeds up."}
+    }
+  ]
+}
+</script>
+<style>
+  .slider-row{display:flex; gap:12px; align-items:center;}
+  .slider-row input[type=range]{flex:1;}
+  .slider-row input[type=number]{width:140px; padding:10px 12px; border:1.5px solid var(--line); border-radius:12px; font-size:15px; background:#fff;}
+  .slider-row input[type=number]:focus{outline:none; border-color:var(--green-bright); box-shadow:0 0 0 4px rgba(16,165,110,.15);}
+  @media(max-width:560px){ .slider-row{flex-wrap:wrap;} .slider-row input[type=number]{width:100%;} }
+  .vs-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:12px;}
+  @media(max-width:640px){ .vs-grid{grid-template-columns:1fr;} }
+  .vs-panel{border:1.5px solid var(--line); border-radius:18px; padding:24px; background:#fff; text-align:center;}
+  .vs-panel.compound{border-color:var(--green); background:linear-gradient(160deg,#f2fbf6,#fdf8e7);}
+  .vs-panel .lbl{font-size:11.5px; letter-spacing:1.6px; text-transform:uppercase; color:var(--muted);}
+  .vs-panel .big2{font-family:'Fraunces',Georgia,serif; font-size:34px; font-weight:800; color:var(--green-dark); margin:6px 0 2px;}
+  .vs-panel .sub{font-size:14px; color:var(--muted);}
+  .vs-panel .sub b{color:var(--ink);}
+</style>
+</head>
+<body>
+
+<div class="ribbon">No spam calls &nbsp;·&nbsp; No bought rankings &nbsp;·&nbsp; <b>Free forever</b></div>
+
+<header class="site">
+  <div class="nav">
+    <a class="logo" href="../index.html">Paisa<span>Sahi</span></a>
+    <div class="nav-links">
+      <a href="emi.html">Calculators</a>
+      <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+      <a href="#">Guides</a>
+      <a href="../our-promise.html">Our Promise</a>
+      <a class="btn" href="#">Get the letter</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="emi.html">Calculators</a> › Interest Lab</div>
+
+  <div class="page-head">
+    <div class="kicker">New view</div>
+    <h1>Interest Lab: Simple vs Compound</h1>
+    <p class="lede">Same principal, same rate, same years — two different rules. For the first year they look like twins. Then compounding starts earning interest on interest, and the gap never closes again.</p>
+    <div class="updated">Updated: October 2026</div>
+  </div>
+
+  <div class="answer-box">
+    <strong>The one-line answer:</strong> simple interest pays only on your original money; compound interest pays on your money <em>plus everything it has already earned</em>. Time is what turns that small definitional difference into lakhs.
+  </div>
+
+  <div class="calc">
+    <h2>Run the experiment</h2>
+    <p class="hint">Drag the years slider slowly and watch the two panels pull apart.</p>
+    <div class="field">
+      <label>Principal <output id="o-prin">₹1,00,000</output></label>
+      <div class="slider-row"><input type="range" id="r-prin" min="1000" max="5000000" step="1000" value="100000" aria-label="Principal"><input type="number" id="n-prin" min="0" value="100000" aria-label="Principal in rupees"></div>
+    </div>
+    <div class="field">
+      <label>Interest rate <output id="o-rate">10.0% p.a.</output></label>
+      <div class="slider-row"><input type="range" id="r-rate" min="1" max="20" step="0.1" value="10" aria-label="Interest rate per annum"><input type="number" id="n-rate" min="0" step="0.1" value="10" aria-label="Interest rate in percent"></div>
+    </div>
+    <div class="field">
+      <label>Years <output id="o-yrs">5 years</output></label>
+      <div class="slider-row"><input type="range" id="r-yrs" min="1" max="40" step="1" value="5" aria-label="Years"><input type="number" id="n-yrs" min="1" max="60" value="5" aria-label="Years"></div>
+    </div>
+    <div class="field">
+      <label>Compounding frequency <span style="font-weight:400; color:var(--muted);">(applies to the compound side)</span></label>
+      <select id="s-freq" aria-label="Compounding frequency">
+        <option value="1" selected>Yearly</option>
+        <option value="2">Half-yearly</option>
+        <option value="4">Quarterly (typical bank FD)</option>
+        <option value="12">Monthly</option>
+        <option value="365">Daily</option>
+      </select>
+    </div>
+
+    <div class="vs-grid">
+      <div class="vs-panel">
+        <div class="lbl">Simple interest</div>
+        <div class="big2" id="si-mat">₹1,50,000</div>
+        <div class="sub">Maturity value · interest earned <b id="si-int">₹50,000</b></div>
+      </div>
+      <div class="vs-panel compound">
+        <div class="lbl">Compound interest</div>
+        <div class="big2" id="ci-mat">₹1,61,051</div>
+        <div class="sub">Maturity value · interest earned <b id="ci-int">₹61,051</b></div>
+      </div>
+    </div>
+
+    <div class="result">
+      <div class="lbl">The compounding gap</div>
+      <div class="big" id="gap-out">₹11,051</div>
+      <div class="result-grid">
+        <div><span>Extra interest from compounding</span><b id="gap-inr">₹11,051</b></div>
+        <div><span>Compound earns more by</span><b id="gap-pct">22.1%</b></div>
+      </div>
+      <p style="margin-top:14px; font-size:14px; color:#cfe3d8;" id="gap-note"></p>
+    </div>
+  </div>
+
+  <div class="formula">
+    <strong>The formulas we use:</strong><br>
+    Simple: <code>Value = P × (1 + r × t ÷ 100)</code> &nbsp;·&nbsp; Compound: <code>Value = P × (1 + r ÷ (100 × k))<sup>k × t</sup></code><br>
+    where <code>P</code> = principal, <code>r</code> = annual rate %, <code>t</code> = years, <code>k</code> = compounding periods per year.
+  </div>
+
+  <div class="assume">
+    <strong>Assumptions:</strong> one deposit, no additions or withdrawals; rate constant for the whole period; no tax or TDS. Real FD returns are trimmed by tax at your slab — the gap between the two rules, however, survives tax, because both sides are taxed.
+  </div>
+
+  <div class="article">
+    <h2>Year by year</h2>
+    <p>The table uses yearly compounding for the compound column, whatever frequency is selected above, so the shape stays easy to read.</p>
+    <table>
+      <thead><tr><th>Year</th><th>Simple value</th><th>Compound value</th><th>Gap</th></tr></thead>
+      <tbody id="year-rows"></tbody>
+    </table>
+
+    <h2>Where each rule actually applies to your life</h2>
+    <p><strong>Compound, working for you:</strong> FDs (quarterly compounding is the Indian bank norm), EPF, PPF, and any investment where returns stay invested. <strong>Compound, working against you:</strong> credit card balances and any loan you underpay — the unpaid interest joins the principal and starts charging you rent too. That's the mechanics behind our <a href="card-truth.html">minimum-due trap</a>. <strong>Simple:</strong> mostly penalty interest, some short-term arrangements, and exam questions. If a product quotes you a rate, the first honest question is always: simple or compound, and how often?</p>
+
+    <div class="faq">
+      <h2>Common questions</h2>
+      <details>
+        <summary>What's the actual difference?</summary>
+        <p>Simple interest is computed only on the original principal. Compound interest is computed on principal plus accumulated interest — interest on interest. Close in year one, decisively different by year ten.</p>
+      </details>
+      <details>
+        <summary>How often do Indian FDs compound?</summary>
+        <p>Typically quarterly. That's why an FD's effective yield is slightly above its headline rate — try the quarterly setting above and compare with yearly.</p>
+      </details>
+      <details>
+        <summary>What is the Rule of 72?</summary>
+        <p>72 ÷ compound rate ≈ years to double your money. At 8%, about 9 years. It only works for compound interest, because simple interest never accelerates.</p>
+      </details>
+      <details>
+        <summary>Where is simple interest used?</summary>
+        <p>Some short-term loans, penalty and late-payment calculations, and certain quoted conventions. Most deposits and virtually all loans compound — which is why this distinction is worth money.</p>
+      </details>
+    </div>
+
+    <h2>Keep exploring</h2>
+    <div class="grid">
+      <div class="card"><div class="icon">📈</div><h3>SIP Calculator</h3><p>Compounding with monthly additions — see what a regular SIP becomes.</p><a href="sip.html">Calculate →</a></div>
+      <div class="card"><div class="icon">🔀</div><h3>Compare Loan Rates</h3><p>The borrowing side: three rates side by side, one honest gap.</p><a href="compare-rates.html">Compare →</a></div>
+      <div class="card"><div class="icon">💳</div><h3>Credit Card Truth</h3><p>Compounding at 42% APR, aimed at you — the minimum-due trap, simulated.</p><a href="card-truth.html">See the truth →</a></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>PaisaSahi</h4>
+        <p>India's honest money guide.<br>पैसा सही — money, done right.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="emi.html">Calculators</a>
+        <a href="../guides/best-credit-cards-2026.html">Credit Cards</a>
+        <a href="../our-promise.html">Our Promise</a>
+      </div>
+      <div>
+        <h4>Fine print</h4>
+        <a href="../how-we-make-money.html">How we make money</a>
+        <a href="../methodology.html">Ranking methodology</a>
+      </div>
+    </div>
+    <div class="fine">
+      PaisaSahi is an education website, not a SEBI-registered investment adviser or a bank. Content is for information only — not financial advice. We may earn affiliate commissions; this never affects rankings.
+    </div>
+  </div>
+</footer>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const fmt = n => '₹' + Math.round(n).toLocaleString('en-IN');
+
+  function pair(rId, nId){
+    const r = $(rId), n = $(nId);
+    r.addEventListener('input', () => { n.value = r.value; calc(); });
+    n.addEventListener('input', () => {
+      const v = parseFloat(n.value);
+      if (!isNaN(v)) r.value = Math.max(+r.min, Math.min(+r.max, v));
+      calc();
+    });
+  }
+  function val(nId){ const v = parseFloat($(nId).value); return isNaN(v) || v < 0 ? 0 : v; }
+
+  pair('r-prin', 'n-prin');
+  pair('r-rate', 'n-rate');
+  pair('r-yrs', 'n-yrs');
+  $('s-freq').addEventListener('change', calc);
+
+  function calc(){
+    const P = val('n-prin'), rate = val('n-rate'), yrs = Math.max(0, Math.round(val('n-yrs')));
+    const k = +$('s-freq').value;
+    $('o-prin').textContent = fmt(P);
+    $('o-rate').textContent = rate.toFixed(1) + '% p.a.';
+    $('o-yrs').textContent = yrs + (yrs === 1 ? ' year' : ' years');
+
+    const siInt = P * rate * yrs / 100;
+    const siMat = P + siInt;
+    const ciMat = P * Math.pow(1 + rate / 100 / k, k * yrs);
+    const ciInt = ciMat - P;
+    const gap = ciInt - siInt;
+    const gapPct = siInt > 0 ? gap / siInt * 100 : 0;
+
+    $('si-mat').textContent = fmt(siMat);
+    $('si-int').textContent = fmt(siInt);
+    $('ci-mat').textContent = fmt(ciMat);
+    $('ci-int').textContent = fmt(ciInt);
+    $('gap-out').textContent = fmt(gap);
+    $('gap-inr').textContent = fmt(gap);
+    $('gap-pct').textContent = gapPct.toFixed(1) + '%';
+    $('gap-note').textContent = (P > 0 && yrs > 0)
+      ? 'On ' + fmt(P) + ' at ' + rate.toFixed(1) + '% over ' + yrs + ' years, compounding earns ' + fmt(gap) + ' more than simple interest — money your money earned by itself.'
+      : '';
+
+    let rows = '';
+    for (let y = 1; y <= yrs; y++) {
+      const sv = P * (1 + rate * y / 100);
+      const cv = P * Math.pow(1 + rate / 100, y);
+      rows += '<tr><td>' + y + '</td><td>' + fmt(sv) + '</td><td>' + fmt(cv) + '</td><td>' + fmt(cv - sv) + '</td></tr>';
+    }
+    $('year-rows').innerHTML = rows || '<tr><td colspan="4">Set at least 1 year to see the table.</td></tr>';
+  }
+  calc();
+</script>
+</body>
+</html>
